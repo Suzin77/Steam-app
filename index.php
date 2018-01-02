@@ -2,6 +2,7 @@
 
 /**
  * A simple PHP MVC skeleton
+ * dodanie mojego tekstu.
  *
  * @package php-mvc
  * @author Panique
