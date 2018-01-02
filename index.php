@@ -4,6 +4,7 @@
  * A simple PHP MVC skeleton
  * dodanie mojego tekstu.
  * dodanie drugiej linijki
+ * dodawanie do develpmentu
  *
  * @package php-mvc
  * @author Panique
