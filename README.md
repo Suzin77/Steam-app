@@ -1,36 +1,10 @@
-# PHP-MVC
 
-An extremely simple and easy to understand MVC skeleton application, reduced to the max.
-Everything is **as simple as possible**, as **manually as possible** and as readable as possible.
-This project is - by intention - NOT a full framework, it's a bare-bone structure, written in
-purely native PHP ! The php-mvc skeleton tries to be the extremely slimmed down opposite of big frameworks
-like Zend2, Symfony or Laravel.
 
-## Basic and Advanced version
+My try of simple MVC application based on skeleton from:
+https://github.com/panique
+https://github.com/panique/php-mvc
 
-This is the basic version. There's another "Advanced" version in development which has
-additional features, currently Twig and SASS. More to come!
-Have a look here: https://github.com/panique/php-mvc-advanced
-
-## Why does this project exist ?
-
-One of the biggest question in the PHP world is "How do I build an application ?".
-It's hard to find a good base, a good file structure and useful information on that, but at the same time
-there are masses of frameworks that might be really good, but really hard to understand, hard to use and extremely
-complex. This project tries to be some kind of naked skeleton bare-bone for quick application building,
-especially for the not-so-advanced coder.
-
-### Goals of this project:
-
-- give people a clean base MVC structure to build a modern PHP application with
-- teach people the basics of the Model-View-Controller architecture
-- encourage people to code according to PSR 1/2 coding guidelines
-- promote the usage of PDO
-- promote the usage of external libraries via Composer
-- promote development with max. error reporting
-- promote to comment code
-- promote the usage of OOP code
-- using only native PHP code, so people don't have to learn a framework
+I left some instalaltion instructions from original readme file.
 
 ## Installation
 
@@ -90,21 +64,7 @@ define('DB_PASS', 'mysql');
 to your database credentials. If you don't have an empty database, create one. Only change the type `mysql` if you
 know what you are doing.
 
-## A quickstart tutorial
-
-You can also find these tutorial pictures in the *_tutorial* folder.
-
-![php-mvc introduction tutorial - page 1](_tutorial/tutorial-part-01.png)
-![php-mvc introduction tutorial - page 2](_tutorial/tutorial-part-02.png)
-![php-mvc introduction tutorial - page 3](_tutorial/tutorial-part-03.png)
-![php-mvc introduction tutorial - page 4](_tutorial/tutorial-part-04.png)
-![php-mvc introduction tutorial - page 5](_tutorial/tutorial-part-05.png)
-
-## You like what you see ?
-
-Then please also have a look on ...
-
-#### My other project php-login
+#### Other project php-login
 
 A collection of 4 similar login scripts for PHP, from a super-simple one-file
 script with a SQLite one-file to a highly professional MVC frameworks solution. All scripts use the most advanced
@@ -117,8 +77,6 @@ https://github.com/panique/php-login-minimal (minimal)
 https://github.com/panique/php-login-advanced (advanced)
 
 https://github.com/panique/php-login-one-file (one-file)
-
-#### My PHP and frontend blog
 
 Lots of non-boring development stuff and tutorials there.
 
@@ -142,26 +100,3 @@ and [Getting started with Composer](http://www.dev-metal.com/getting-started-com
 
 This project is licensed under the MIT License.
 This means you can use and modify it for free in private or commercial projects.
-
-## Contribute
-
-Please commit into the develop branch (which holds the in-development version), not into master branch
-(which holds the tested and stable version).
-
-## Support / Donate
-
-If you think this script is useful and saves you a lot of work, then think about supporting the project:
-
-1. Donate via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=P5YLUK4MW3LDG) or [GitTip](https://www.gittip.com/Panique/)
-2. Rent your next server at [A2 Hosting](http://www.a2hosting.com/4471.html) or [DigitalOcean](https://www.digitalocean.com/?refcode=40d978532a20).
-3. Contribute to this project. Feel free to improve this project with your skills.
-4. Spread the word: Tell others about this project.
-
-## Linked music tracks in the demo application
-
-The linked tracks in this naked application are just some of my personal favourites of the last few months.
-I think it's always a good idea to fill boring nerd-code stuff with quality culture.
-
-## Statistics (by BitDeli)
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/panique/php-mvc/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
