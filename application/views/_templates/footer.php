@@ -1,6 +1,7 @@
 
 <div class="container">
-	Edycja 2018 	
+	Edycja Suzin 2018 
+	
 </div>
 
 </body>
