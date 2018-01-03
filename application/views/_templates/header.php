@@ -38,6 +38,7 @@
             <li><a href="<?php echo URL; ?>home/exampletwo"><?php echo URL; ?>home/exampletwo</a></li>
             <!-- "songs" and "songs/index" are the same -->
             <li><a href="<?php echo URL; ?>songs/"><?php echo URL; ?>songs/index</a></li>
+            <li><a href ="<?php echo URL; ?>games/"><?php echo URL; ?>games/index</a></li>
         </ul>
     </div>
     <!-- simple div for javascript output, just to show how to integrate js into this MVC construct -->
