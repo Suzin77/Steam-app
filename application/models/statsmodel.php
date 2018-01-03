@@ -27,4 +27,13 @@ class StatsModel
         // fetchAll() is the PDO method that gets all result rows
         return $query->fetch()->amount_of_songs;
     }
+
+    public function getAmountOfUsers()
+    {
+        $sql ="SELECT COUNT(user_id) AS amount_of_users FROM users";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        return $query->fetch()->amount_of_users;
+    }
 }
