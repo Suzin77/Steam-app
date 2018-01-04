@@ -39,11 +39,12 @@ class SteamUsers extends Controller
 		*/
 		if(isset($_POST['submit_search_steam_user'])){
 			$user_model = $this->loadModel('SteamUsersModel');
-			$user_info = $user_model->searchSteamUser($_POST['steam_user_id']);
+			$userInfo = $user_model->searchSteamUser($_POST['steam_user_id']);
 		}
 			
 		require 'application/views/_templates/header.php';
 	    require 'application/views/steamusers/search.php';
+	    require 'application/views/_templates/debug.php';
 	    require 'application/views/_templates/footer.php';
 	}   
 

@@ -29,19 +29,21 @@ class SteamUsersModel
 
 	}
 
+
+
 	public function searchSteamUser($steamUserId)
 	{
 		$request = $this -> createSteamUserInfoRequest($steamUserId);
 		return  $this -> getResponse($request);
 	}
 
-	function createSteamUserInfoRequest($steamUserId)
+	public function createSteamUserInfoRequest($steamUserId)
     {   	
 	    $steamUserInfoRequest = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=".STEAM_API_KEY."&steamids=".$steamUserId."&format=json";   		
 	    return $steamUserInfoRequest;
     }
 
-    function getResponse($url)
+    public function getResponse($url)
     {
     	$ch = curl_init();
 	    curl_setopt($ch, CURLOPT_URL,$url);

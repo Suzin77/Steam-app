@@ -7,6 +7,8 @@
         <input type="submit" name="submit_search_steam_user" value="Submit" />
     </form>
     <div>
-    	<?php if(isset($user_info)) var_export($user_info) ?>
+    	
+    	<?php if(isset($userInfo['response']['players'][0]['personaname'])) echo $userInfo['response']['players'][0]['personaname']; ?>
+
     </div>	
 </div>
