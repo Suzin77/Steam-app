@@ -30,7 +30,12 @@ class SteamUsers extends Controller
 		}
 		
 		header('location: ' . URL . 'steamusers/index');
-	}    
+	}
+
+	public function searchSteamUser($steamUserId)
+	{
+		
+	}   
 
 }
 

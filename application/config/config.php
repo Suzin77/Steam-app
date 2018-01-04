@@ -7,6 +7,10 @@
  * If you want to know why we use "define" instead of "const" @see http://stackoverflow.com/q/2447791/1114320
  */
 
+/*Configuration for steam API.
+Defined STEAM_API_KEY for connect with steam. Key is in seperate file in "higher" folder, not includet in repoaitory for security reasons. Normaly key would be here in config file.
+*/
+require '../cred/steamkey.php';
 /**
  * Configuration for: Error reporting
  * Useful to show every little problem during development, but only show hard errors in production
