@@ -28,5 +28,33 @@ class SteamUsersModel
 		$query->execute(array(':user_id'=> $user_id));
 
 	}
+
+	public function searchSteamUser($steamUserId)
+	{
+		$request = $this -> createSteamUserInfoRequest($steamUserId);
+		return  $this -> getResponse($request);
+	}
+
+	function createSteamUserInfoRequest($steamUserId)
+    {   	
+	    $steamUserInfoRequest = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=".STEAM_API_KEY."&steamids=".$steamUserId."&format=json";   		
+	    return $steamUserInfoRequest;
+    }
+
+    function getResponse($url)
+    {
+    	$ch = curl_init();
+	    curl_setopt($ch, CURLOPT_URL,$url);
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	    $output = curl_exec($ch);
+	    if ($output === false){ 
+	       echo "Crul error: ".crul_error($ch);
+	    } else {	
+	       $data = json_decode($output,true);
+	       curl_close ($ch);      
+	       return $data;
+	    }
+    }
+
 }
 ?>

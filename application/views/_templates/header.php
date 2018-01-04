@@ -22,7 +22,7 @@
         <br />
         The green line is added via JavaScript (to show how to integrate JavaScript).
     </div>
-    <h1>The header (used on all pages)</h1>
+    <h1></h1>
     <!-- demo image -->
     <h3>Demo image, to show usage of public/img folder</h3>
     <div>
@@ -39,6 +39,7 @@
             <!-- "songs" and "songs/index" are the same -->
             <li><a href="<?php echo URL; ?>songs/"><?php echo URL; ?>songs/index</a></li>
             <li><a href ="<?php echo URL; ?>steamusers/"><?php echo URL; ?>steamusers/index</a></li>
+            <li><a href ="<?php echo URL; ?>steamusers/search"><?php echo URL; ?>steamusers/search</a></li>
         </ul>
     </div>
     <!-- simple div for javascript output, just to show how to integrate js into this MVC construct -->

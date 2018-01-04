@@ -32,10 +32,29 @@ class SteamUsers extends Controller
 		header('location: ' . URL . 'steamusers/index');
 	}
 
-	public function searchSteamUser($steamUserId)
+	public function search()
 	{
-		
+		/* Page Search.
+		If search form are submitted app start to connect with Steam API and return result as an array.
+		*/
+		if(isset($_POST['submit_search_steam_user'])){
+			$user_model = $this->loadModel('SteamUsersModel');
+			$user_info = $user_model->searchSteamUser($_POST['steam_user_id']);
+		}
+			
+		require 'application/views/_templates/header.php';
+	    require 'application/views/steamusers/search.php';
+	    require 'application/views/_templates/footer.php';
 	}   
+
+	public function searchSteamUser()
+	{
+		if(isset($_POST['submit_search_steam_user'])){
+			$user_model = $this->loadModel('SteamUsersModel');
+			$user_model->searchSteamUser($_POST['steam_user_id']);
+
+		}
+	}
 
 }
 
