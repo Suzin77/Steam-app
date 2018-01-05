@@ -7,8 +7,14 @@
         <input type="submit" name="submit_search_steam_user" value="Submit" />
     </form>
     <div>
-    	
-    	<?php if(isset($userInfo['response']['players'][0]['personaname'])) echo $userInfo['response']['players'][0]['personaname']; ?>
+    	<h3>User Summary</h3>
+    	<?php 
+    	    if(isset($userInfo['response']['players'][0]['personaname'])){
+    	 	    echo $userInfo['response']['players'][0]['personaname'];
+    	 	    echo "</br>";
+    	 	    //$user_model->recursiveResponse($userAchivments);
+    	 	}     
+    	?>
 
     </div>	
 </div>

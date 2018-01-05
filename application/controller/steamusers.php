@@ -40,6 +40,10 @@ class SteamUsers extends Controller
 		if(isset($_POST['submit_search_steam_user'])){
 			$user_model = $this->loadModel('SteamUsersModel');
 			$userInfo = $user_model->searchSteamUser($_POST['steam_user_id']);
+			//$userArray = $user_model->recursiveResponse($userinfo);
+			$userAchivments = $user_model->getPlayerAchivments($_POST['steam_user_id'],225160);
+			
+			//$list = $user_model->recursiveResponse($userAchivments);
 		}
 			
 		require 'application/views/_templates/header.php';
@@ -47,16 +51,6 @@ class SteamUsers extends Controller
 	    require 'application/views/_templates/debug.php';
 	    require 'application/views/_templates/footer.php';
 	}   
-
-	public function searchSteamUser()
-	{
-		if(isset($_POST['submit_search_steam_user'])){
-			$user_model = $this->loadModel('SteamUsersModel');
-			$user_model->searchSteamUser($_POST['steam_user_id']);
-
-		}
-	}
-
 }
 
 ?>
