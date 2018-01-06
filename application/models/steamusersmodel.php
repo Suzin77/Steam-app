@@ -73,16 +73,14 @@ class SteamUsersModel
     public function recursiveResponse($array, $level = 1)
     {
 	    foreach($array as $key => $value){
-	        //If $value is an array.
-	        
+	        //If $value is an array.	        
 	        if(is_array($value)){
-	        	echo str_repeat("+", $level)." ".$key.": </br>";
-
+	        	echo str_repeat("+", $level)." [".$key."]: </br>";
 	            //We need to loop through it.
 	            $this -> recursiveResponse($value, $level + 1);
 	        } else {
 	            //It is not an array, so print it out.
-	            echo str_repeat("+", $level)." ".$key . ": " . $value, '<br>';
+	            echo str_repeat("+", $level)." [".$key . "]: [" . $value, ']<br>';
 	        }
 	    }
 	}
