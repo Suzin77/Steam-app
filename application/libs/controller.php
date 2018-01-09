@@ -52,7 +52,9 @@ class Controller
 
     public function loadView($viewName)
     {
-        require 'application/views/_templates/'.strtolower($viewName).'php';
+        require 'application/views/_templates/'.strtolower($viewName).'.php';
+
+        return new $viewName();
 
     }
 }

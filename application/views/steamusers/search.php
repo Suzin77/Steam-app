@@ -12,6 +12,7 @@
     	    if(isset($userInfo['response']['players'][0]['personaname'])){
     	 	    echo $userInfo['response']['players'][0]['personaname'];
     	 	    echo "</br>";
+    	 	    echo $ftablePass."</br>";
     	 	    //$user_model->recursiveResponse($userAchivments);
     	 	
     	 	    
