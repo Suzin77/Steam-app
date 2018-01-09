@@ -26,8 +26,22 @@
 
 	    	 	}
 	    	 	$table .= "</table></tbody>";
-	    	 	echo $table;
-	    	 }	     
+	    	 	echo $table;	    	 	
+	    	 }
+
+	    	if (isset($userFriends)){
+	    		$friendTable = "<table> <tbody>";
+	    		foreach ($userFriends['friendslist']['friends'] as $key => $value){
+	    	 		$friendTable .="<tr>   	 		    						
+	    						<td>".$userFriends['friendslist']['friends'][$key]['steamid']."</td>
+	    						<td>".$userFriends['friendslist']['friends'][$key]['friend_since']."</td>
+	                            
+	    					  </tr>";	 
+
+	    	 	}
+	    	 	$friendTable .= "</table></tbody>";
+	    	 	echo $friendTable;
+	    	}  	     
     	?>
 
     </div>	
