@@ -29,8 +29,6 @@ class SteamUsersModel
 
 	}
 
-
-
 	public function searchSteamUser($steamUserId)
 	{
 		$request = $this -> createSteamUserInfoRequest($steamUserId);
@@ -75,12 +73,12 @@ class SteamUsersModel
 	    foreach($array as $key => $value){
 	        //If $value is an array.	        
 	        if(is_array($value)){
-	        	echo str_repeat("+", $level)." [".$key."]: </br>";
+	        	echo str_repeat("&nbsp", $level)." [".$key."]: </br>";
 	            //We need to loop through it.
 	            $this -> recursiveResponse($value, $level + 1);
 	        } else {
 	            //It is not an array, so print it out.
-	            echo str_repeat("+", $level)." [".$key . "]: [" . $value, ']<br>';
+	            echo str_repeat("&nbsp ", $level)." [".$key . "]: " . $value, '<br>';
 	        }
 	    }
 	}

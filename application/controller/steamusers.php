@@ -39,7 +39,10 @@ class SteamUsers extends Controller
 		*/
 		if(isset($_POST['submit_search_steam_user'])){
 			$user_model = $this->loadModel('SteamUsersModel');
+			$userFriendsModel = $this->loadModel('SteamApiModel');
+
 			$userInfo = $user_model->searchSteamUser($_POST['steam_user_id']);
+			$userFriends = $userFriendsModel->getSteamUserFriends($_POST['steam_user_id']);
 			//$userArray = $user_model->recursiveResponse($userinfo);
 			$userAchivments = $user_model->getPlayerAchivments($_POST['steam_user_id'],225160);
 			
