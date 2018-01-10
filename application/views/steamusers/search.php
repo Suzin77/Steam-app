@@ -9,10 +9,11 @@
     <div>
     	<h3>User Summary</h3>
     	<?php 
+    		
     	    if(isset($userInfo['response']['players'][0]['personaname'])){
     	 	    echo $userInfo['response']['players'][0]['personaname'];
     	 	    echo "</br>";
-    	 	    echo $ftablePass."</br>";
+    	 	    echo "<table>".$ftablePass."</table></br>";
     	 	    //$user_model->recursiveResponse($userAchivments);
     	 	
     	 	    

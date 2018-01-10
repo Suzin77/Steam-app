@@ -47,7 +47,8 @@ class SteamUsers extends Controller
 			$userAchivments = $user_model->getPlayerAchivments($_POST['steam_user_id'],225160);
 
 			$ftable = $this->loadView('tablesviews');
-			$ftablePass = $ftable->friendTable();
+			$ftablePass = $ftable->cerateTableHeader(array('pierwszy','drugi','trzeci'));
+			$ftableBody = $ftable->crateTableBody($userFriends);
 			
 			//$list = $user_model->recursiveResponse($userAchivments);
 		}

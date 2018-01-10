@@ -3,8 +3,12 @@
 <?php
 
 if(isset($userInfo)){
-	$user_model->recursiveResponse($userInfo);
+	//var_dump($ftableBody);
+	echo"</br>".$ftableBody;
+	//var_dump($userFriends);
+	//$user_model->recursiveResponse($userInfo);
 	$userFriendsModel->recursiveResponse($userFriends);
+
 	//$user_model->recursiveResponse($userAchivments);
 	//$user_model->recursiveResponse($user_model->getGameInfo(2800));
 	foreach($userInfo['response']['players'][0] as $key => $value){
