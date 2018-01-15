@@ -38,9 +38,9 @@ class TablesViews
 		$tbody = "<tbody>";
 		
 		foreach($tableData as $key => $value){
-			var_dump($key);
-			echo "</br>";
-			var_export($tableHeaders);
+			//var_dump($key);
+			//echo "</br>";
+			//var_export($tableHeaders);
 			//var_dump($value['steamid']);
 			$tbody .= "<tr>";
 			foreach($tableHeaders as $column => $columnValue){

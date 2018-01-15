@@ -4,7 +4,7 @@
 
 if(isset($userInfo)){
 	//var_dump($ftableBody);
-	echo"</br>".$finalTable;
+	echo"</br>".$userFriendsTable;
 	echo"</br>".$tableAchiv;
 	//var_dump($userFriends);
 	//$user_model->recursiveResponse($userInfo);
@@ -16,8 +16,6 @@ if(isset($userInfo)){
 		echo "klucz: <b>".$key."</b> wartosc <b>".$value." </b></br>";
 	}	
 }
-
-
 
 ?>
 

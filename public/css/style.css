@@ -11,6 +11,7 @@ body {
 
 table {
     font-size: 13px;
+    border-collapse: separate;
 }
 
 .container {

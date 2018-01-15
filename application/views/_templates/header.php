@@ -7,9 +7,13 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- css -->
+    <!-- Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <!--own css-->
     <link href="<?php echo URL; ?>public/css/style.css" rel="stylesheet">
     <!-- jQuery -->
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    
     <!-- our JavaScript -->
     <script src="<?php echo URL; ?>public/js/application.js"></script>
 </head>
@@ -17,9 +21,7 @@
 <!-- header -->
 <div class="container">
     <!-- Info -->
-    <div class="where-are-we-box">
-        Everything in this box is loaded from <span class="bold">application/views/_templates/header.php</span> !
-        <br />
+    <div class="where-are-we-box">        
         The green line is added via JavaScript (to show how to integrate JavaScript).
     </div>
     <h1></h1>
