@@ -38,19 +38,23 @@ class SteamUsers extends Controller
 		If search form are submitted app start to connect with Steam API and return result as an array.
 		*/
 		if(isset($_POST['submit_search_steam_user'])){
+
 			$user_model = $this->loadModel('SteamUsersModel');
 			$userFriendsModel = $this->loadModel('SteamApiModel');
+			//sanitization of enterned data.
+			$userFriendsModel->sanitizeString(($_POST['submit_search_steam_user']));
 
 			$userInfo = $user_model->searchSteamUser($_POST['steam_user_id']);
 			$userFriends = $userFriendsModel->getSteamUserFriends($_POST['steam_user_id']);
 			//$userArray = $user_model->recursiveResponse($userinfo);
-			$userAchivments = $user_model->getPlayerAchivments($_POST['steam_user_id'],225160);
+			$userAchivments = $user_model->getPlayerAchivments($_POST['steam_user_id'],39140);
 
 			$ftable = $this->loadView('tablesviews');
 			$ftablePass = $ftable->createTableHeader($userFriends['friendslist']['friends'][0]);
 			$userFriendsTable = $ftable->createTable($userFriends['friendslist']['friends'][0],$userFriends['friendslist']['friends']);
+			if(isset($userAchivments)){	
 			$tableAchiv = $ftable->createTable($userAchivments['playerstats']['achievements'][0],$userAchivments['playerstats']['achievements']);
-			
+			}
 			//$list = $user_model->recursiveResponse($userAchivments);
 		}
 			

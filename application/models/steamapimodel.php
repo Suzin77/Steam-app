@@ -11,6 +11,13 @@ class SteamApiModel
 		return $this->getResponse($steamUserFriendsRequest);
 	}
 
+	public function sanitizeString($string)
+	{
+		$string = strip_tags($string);
+		$string = htmlentities($string);
+		return stripcslashes($string);
+
+	}
 	public function getResponse($url)
     {
     	$ch = curl_init();

@@ -32,16 +32,16 @@
     </div>
     <!-- navigation -->
     <h3>Demo Navigation</h3>
-    <div class="navigation">
+    <div class="nav navigation">
         <ul>
             <!-- same like "home" or "home/index" -->
-            <li><a href="<?php echo URL; ?>"><?php echo URL; ?>home</a></li>
-            <li><a href="<?php echo URL; ?>home/exampleone"><?php echo URL; ?>home/exampleone</a></li>
-            <li><a href="<?php echo URL; ?>home/exampletwo"><?php echo URL; ?>home/exampletwo</a></li>
+            <li class = "btn"><a href="<?php echo URL; ?>">home</a></li>
+            <li class = "btn"><a href="<?php echo URL; ?>home/exampleone">exampleone</a></li>
+            <li class = "btn"><a href="<?php echo URL; ?>home/exampletwo">exampletwo</a></li>
             <!-- "songs" and "songs/index" are the same -->
-            <li><a href="<?php echo URL; ?>songs/"><?php echo URL; ?>songs/index</a></li>
-            <li><a href ="<?php echo URL; ?>steamusers/"><?php echo URL; ?>steamusers/index</a></li>
-            <li><a href ="<?php echo URL; ?>steamusers/search"><?php echo URL; ?>steamusers/search</a></li>
+            <li class = "btn"><a href="<?php echo URL; ?>songs/">songs/index</a></li>
+            <li class = "btn"><a href ="<?php echo URL; ?>steamusers/">steamusers/index</a></li>
+            <li class = "btn"><a href ="<?php echo URL; ?>steamusers/search">steamusers/search</a></li>
         </ul>
     </div>
     <!-- simple div for javascript output, just to show how to integrate js into this MVC construct -->

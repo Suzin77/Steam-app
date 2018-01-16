@@ -35,8 +35,7 @@ class TablesViews
 
 	public function createTableBody($tableHeaders,$tableData)
 	{
-		$tbody = "<tbody>";
-		
+		$tbody = "<tbody>";		
 		foreach($tableData as $key => $value){
 			//var_dump($key);
 			//echo "</br>";
@@ -46,8 +45,7 @@ class TablesViews
 			foreach($tableHeaders as $column => $columnValue){
 				$tbody .="
 						  
-						  <td>".$value[$column]."</td>";				
-						  
+						  <td>".$value[$column]."</td>";						  
 			}
 			$tbody .= "</tr>";		   
 		}

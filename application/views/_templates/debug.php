@@ -6,6 +6,7 @@ if(isset($userInfo)){
 	//var_dump($ftableBody);
 	echo"</br>".$userFriendsTable;
 	echo"</br>".$tableAchiv;
+	var_dump($userAchivments);
 	//var_dump($userFriends);
 	//$user_model->recursiveResponse($userInfo);
 	//$userFriendsModel->recursiveResponse($userFriends);
