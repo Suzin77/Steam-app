@@ -33,7 +33,8 @@ class StatsModel
         $sql ="SELECT COUNT(user_id) AS amount_of_users FROM users";
         $query = $this->db->prepare($sql);
         $query->execute();
-
-        return $query->fetch()->amount_of_users;
+        $response = $query->fetch();
+        //return $query->fetch()->amount_of_users;
+        return $response['amount_of_users'];
     }
 }

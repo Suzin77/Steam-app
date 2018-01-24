@@ -16,15 +16,15 @@
             <tbody>
             <?php foreach ($users as $user) { ?>
                 <tr>
-                    <td><?php if (isset($user->user_id)) echo $user->user_id; ?></td>
-                    <td><?php if (isset($user->personal_name)) echo $user->personal_name; ?></td>
-                    <td><?php if (isset($user->track)) echo $user->track; ?></td>
+                    <td><?php if (isset($user['user_id'])) echo $user['user_id']; ?></td>
+                    <td><?php if (isset($user['personal_name'])) echo $user['personal_name']; ?></td>
+                    <td><?php if (isset($user['track'])) echo $user['track']; ?></td>
                     <td>
                         <?php if (isset($user->link)) { ?>
                             <a href="<?php echo $user->link; ?>"><?php echo $user->link; ?></a>
                         <?php } ?>
                     </td>
-                    <td><a href="<?php echo URL . 'steamusers/deleteuser/' . $user->user_id; ?>">x</a></td>
+                    <td><a href="<?php echo URL . 'steamusers/deleteuser/' . $user['user_id']; ?>">x</a></td>
                 </tr>
             <?php } ?>
             <!-- end of foreach -->

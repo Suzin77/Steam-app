@@ -2,11 +2,17 @@
 
 class SteamApiModel
 {
-	function __construct(){}
+	function __construct($db){
+		try {
+			$this->db = $db;
+		} catch (PDOException $e){
+			exit('Nie udało się połączyć z bazą');
+		}
+	}
+	
 
 	public function getSteamUserFriends($steamUserId)
-	{
-		
+	{		
 		$steamUserFriendsRequest = "http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=".STEAM_API_KEY."&steamid=".$steamUserId."&relationship=friend";
 		return $this->getResponse($steamUserFriendsRequest);
 	}
@@ -18,6 +24,20 @@ class SteamApiModel
 		return stripcslashes($string);
 
 	}
+
+	public function addUser($SteamUserData)
+	{	
+		$sql = "INSERT INTO users (user_id, persona_name, time_created)
+                VALUES (:steam_id, :persona_name, :time_created)";
+        $query = $this->db->prepare($sql);	
+    	$query->bindParam(':steam_id', $SteamUserData['response']['players'][0]['steamid'], PDO::PARAM_STR);
+    	$query->bindParam(':persona_name', $SteamUserData['response']['players'][0]['personaname']);
+    	$query->bindParam(':time_created', $SteamUserData['response']['players'][0]['timecreated']);
+    	
+    	$query->execute();
+
+	}
+
 	public function getResponse($url)
     {
     	$ch = curl_init();

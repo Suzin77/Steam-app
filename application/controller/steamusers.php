@@ -8,7 +8,6 @@ class SteamUsers extends Controller
 		/* Page: index.
 
 		*/
-
 		echo "We are in index fumction in games controller ";
 
 		$games_model = $this->loadModel('SteamUsersModel');
@@ -47,6 +46,13 @@ class SteamUsers extends Controller
 			$userInfo = $user_model->searchSteamUser($_POST['steam_user_id']);
 			$userFriends = $userFriendsModel->getSteamUserFriends($_POST['steam_user_id']);
 			//$userArray = $user_model->recursiveResponse($userinfo);
+			//var_dump($user_model->checkUser(76561197997461962));
+			if ($user_model->checkUser($_POST['steam_user_id'])){
+				$userFriendsModel->addUser($userInfo);
+				echo "zapisano";				
+			} else {
+				echo "taki juz był </br>";
+			}
 			$userAchivments = $user_model->getPlayerAchivments($_POST['steam_user_id'],39140);
 
 			$ftable = $this->loadView('tablesviews');
@@ -54,7 +60,16 @@ class SteamUsers extends Controller
 			$userFriendsTable = $ftable->createTable($userFriends['friendslist']['friends'][0],$userFriends['friendslist']['friends']);
 			if(isset($userAchivments)){	
 			$tableAchiv = $ftable->createTable($userAchivments['playerstats']['achievements'][0],$userAchivments['playerstats']['achievements']);
+
+			//check of friends
+			//var_dump($user_model->checkFriend('76561197970373921'));
+			//$user_model->checkAllFriends($userFriends['friendslist']['friends']);
+			//var_export($user_model->checkAllSteamUsersToChceck($user_model->getAllSteamUsersToCheck()));
+			//var_export($user_model->getAllSteamUsersToCheck());
+
+
 			}
+
 			//$list = $user_model->recursiveResponse($userAchivments);
 		}
 			

@@ -52,6 +52,65 @@ class SteamUsersModel
     	return $this -> getResponse("http://store.steampowered.com/api/appdetails?appids=".$appId);
     }
 
+    public function addFriend($firendSteamId)
+    {
+    	$sql = "INSERT INTO steam_users_to_check (steam_id) VALUES (:steam_id)";
+    	$query = $this->db->prepare($sql);
+    	$query->execute(array(':steam_id'=>$firendSteamId));
+    }
+
+    public function checkUser($userId)
+    {
+    	$sql = "SELECT user_id FROM users WHERE user_id = :steam_id";
+    	$query = $this->db->prepare($sql);
+    	//var_dump($query);
+    	var_dump($userId);
+    	$query->bindParam(':steam_id', $userId, PDO::PARAM_STR);
+    	$query->execute();
+    	if(($query->rowCount()) == 0){
+    	    return true;  	    	
+    	}
+    	return false;
+    }
+
+
+    public function checkFriend($firendSteamId)
+    {
+    	$sql = "SELECT steam_id FROM steam_users_to_check WHERE steam_id = :steam_id";
+    	$query = $this->db->prepare($sql);
+    	$query->execute(array(':steam_id'=>$firendSteamId));
+    	return $query->fetchAll();
+    }
+
+    public function checkAllFriends($data)
+    {			
+    	foreach ($data as $key => $value){
+    		if (!($this->checkFriend($data[$key]['steamid']))){
+    			$this->addFriend($data[$key]['steamid']);
+    		}
+    	}
+    }
+
+    public function getAllSteamUsersToCheck()
+    {
+    	$sql = "SELECT steam_id FROM steam_users_to_check";
+    	$query = $this->db->prepare($sql);
+    	$query->execute();
+    	return $query->fetchAll();
+    }
+
+    public function checkAllSteamUsersToChceck($data)
+    {		
+    	foreach($data as $key => $value ){
+    		echo "data from: ";
+    		var_dump($data[$key]['steam_id']);
+    		echo "</br>";
+    		if (!($this->checkFriend($data[$key]['steam_id']))){
+    			$this->addFriend($data[$key]['steam_id']);
+    		}
+    	}
+    }
+
 
     public function getResponse($url)
     {
