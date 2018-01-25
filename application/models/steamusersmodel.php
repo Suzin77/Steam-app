@@ -62,9 +62,7 @@ class SteamUsersModel
     public function checkUser($userId)
     {
     	$sql = "SELECT user_id FROM users WHERE user_id = :steam_id";
-    	$query = $this->db->prepare($sql);
-    	//var_dump($query);
-    	var_dump($userId);
+    	$query = $this->db->prepare($sql);    	
     	$query->bindParam(':steam_id', $userId, PDO::PARAM_STR);
     	$query->execute();
     	if(($query->rowCount()) == 0){
@@ -79,13 +77,16 @@ class SteamUsersModel
     	$sql = "SELECT steam_id FROM steam_users_to_check WHERE steam_id = :steam_id";
     	$query = $this->db->prepare($sql);
     	$query->execute(array(':steam_id'=>$firendSteamId));
-    	return $query->fetchAll();
+    	if(($query->rowCount())== 0 ){
+    		return true;
+    	}
+    	return false;
     }
 
     public function checkAllFriends($data)
     {			
     	foreach ($data as $key => $value){
-    		if (!($this->checkFriend($data[$key]['steamid']))){
+    		if (($this->checkFriend($data[$key]['steamid']))){
     			$this->addFriend($data[$key]['steamid']);
     		}
     	}
