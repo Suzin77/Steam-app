@@ -14,7 +14,7 @@ class SteamUsersModel
 
 	public function getAllUsers()
 	{
-		$sql = "SELECT user_id,personal_name FROM users";
+		$sql = "SELECT user_id,persona_name,avatar FROM users";
 		$query = $this->db->prepare($sql);
 		$query->execute();
 
@@ -81,6 +81,15 @@ class SteamUsersModel
     		return true;
     	}
     	return false;
+    }
+
+    public function removeId($friendSteamId, $tableName)
+    {
+    	$sql =  "DELETE FROM $tableName WHERE steam_id = :steam_id";
+    	$query = $this->db->prepare($sql);
+    	$query->bindParam(':steam_id', $friendSteamId );
+    	$query->execute();
+    	echo "</br> usunięcie wykonane";
     }
 
     public function checkAllFriends($data)
