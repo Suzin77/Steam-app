@@ -11,11 +11,12 @@ class SteamUsers extends Controller
 		//echo "We are in index fumction in games controller ";
 
 		$games_model = $this->loadModel('SteamUsersModel');
-	    $users = $games_model->getUsers();
+	    $users = $games_model->getUsers();	    
 	    $steamapimodel = $this->loadModel('SteamApiModel');
 	    $statsModel = $this->loadModel('StatsModel');
 	    $amount_of_users = $statsModel->getAmountOf('user_id','users');
 	    $amountToCheck = $statsModel->getAmountOf('steam_id','steam_users_to_check');
+	    $exampleToCheck = $games_model->getRandomRows('steam_id','steam_users_to_check',10);
 	    $amoutOfGames = $statsModel->getAmountOf('game_id','games');
 	    $games = $games_model->getGames();
 	    $gameInfo = $steamapimodel->getGameInfo($games[14]['game_id']);
@@ -60,9 +61,7 @@ class SteamUsers extends Controller
 						if($gameData[$userGames['response']['games'][$game]['appid']]['success'] == true){
 							$user_model->writeGame($userGames['response']['games'][$game]['appid'],$gameData);
 					    }
-					}
-					//echo $game."//";
-					
+					}					
 				}
 				//$user_model->writeUserGamesRealtion($userID, $userGames['response']['games']);
 			}
@@ -75,10 +74,8 @@ class SteamUsers extends Controller
 			//$userArray = $user_model->recursiveResponse($userinfo);
 			//var_dump($user_model->checkUser(76561197997461962));
 			if ($user_model->checkUser($_POST['steam_user_id'])){
-				$userFriendsModel->addUser($userInfo);
-				//echo "zapisano";				
+				$userFriendsModel->addUser($userInfo);						
 			} else {
-				//echo "taki juz był </br>";
 			}
 			//$userAchivments = $user_model->getPlayerAchivments($_POST['steam_user_id'],39140);
 
@@ -121,7 +118,6 @@ class SteamUsers extends Controller
 			} else {
 				echo "taki juz był </br>";
 			}
-			//$userModel->checkUser($userId);
 			$userModel->removeId($userId, "steam_users_to_check");
 		}
 		header('refresh:5; url='.URL.'steamusers/index');

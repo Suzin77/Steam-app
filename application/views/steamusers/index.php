@@ -3,6 +3,12 @@
 
 	<p>LIczba znalezionych graczy to: <span><?php echo $amount_of_users?></span></p>
     <p>Liczba graczy do sprawdzenia to : <span><?php echo $amountToCheck?></span></p>
+    <p>Przykłady do sprawdzenia: 
+    <?php foreach($exampleToCheck as $id){
+        echo $id['steam_id']." // ";
+    }
+    ?>       
+    </p>
     <p>Liczba gier w bazie: <span><?php echo $amoutOfGames ?></span></p>
 
     <div class = "row">
@@ -11,9 +17,9 @@
             <table class = "">
                 <thead style="background-color: #ddd; font-weight: bold;">
                 <tr>
-                    <td>Id</td>
-                    <td>Artist</td>
-                    <td>Track</td>
+                    <td>User steam ID</td>
+                    <td>Name</td>
+                    <td>Image</td>
                     <td>Link</td>
                     <td>DELETE</td>
                 </tr>

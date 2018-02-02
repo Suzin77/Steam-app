@@ -12,6 +12,14 @@ class SteamUsersModel
 		}
 	}
 
+	public function getRandomRows($column,$tableName,$limit=1)
+	{
+		$sql = "SELECT $column FROM $tableName ORDER BY rand() LIMIT $limit";
+		$query = $this->db->prepare($sql);
+		$query->execute();
+		return $query->fetchAll();
+	}
+
 	public function getAllUsers()
 	{
 		$sql = "SELECT user_id,persona_name,avatar FROM users";
@@ -23,19 +31,17 @@ class SteamUsersModel
 
 	public function getUsers()
 	{
-		$sql = "SELECT user_id,persona_name,avatar FROM users LIMIT 20";
+		$sql = "SELECT user_id,persona_name,avatar FROM users ORDER BY rand() LIMIT 20";
 		$query = $this->db->prepare($sql);
 		$query->execute();
-
 		return $query->fetchAll();
 	}
 
 	public function getGames()
 	{
-		$sql = "SELECT game_id,game_name FROM games LIMIT 20";
+		$sql = "SELECT game_id,game_name FROM games ORDER BY rand() LIMIT 20";
 		$query = $this->db->prepare($sql);
 		$query->execute();
-
 		return $query->fetchAll();
 	}
 

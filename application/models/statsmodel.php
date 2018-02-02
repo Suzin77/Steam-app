@@ -34,7 +34,6 @@ class StatsModel
         $query = $this->db->prepare($sql);
         $query->execute();
         $response = $query->fetch();
-        //return $query->fetch()->amount_of_users;
         return $response['amount_of_users'];
     }
 }
