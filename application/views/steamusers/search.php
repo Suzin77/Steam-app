@@ -11,10 +11,11 @@
     	<?php 
 
     	    if(isset($userInfo['response']['players'][0]['personaname'])){
-    	 	    echo $userInfo['response']['players'][0]['personaname'];
-    	 	    echo "</br>";
-    	 	    echo "<table>".$ftablePass."</table></br>";
+    	 	    echo $userInfo['response']['players'][0]['personaname']."</br>";
+    	 	    //echo "</br>";
+    	 	    //echo "<table>".$ftablePass."</table></br>";
     	 	    //$user_model->recursiveResponse($userAchivments);
+    	 	    echo "Urzytkownik ma w kolekcji ".$userGames['response']['game_count']." gier</br>";
     	 	
     	 	    
 	    	 	$table = "<table> <tbody>";

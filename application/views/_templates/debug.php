@@ -2,9 +2,23 @@
 <p>debuger</p>
 <?php
 
+if(isset($userGames)){
+	if($userGames['response'] != 0){
+		var_dump($userGames['response']['game_count']);
+		//var_dump($userGames);
+	}	
+}
+
+if (isset($games)){ 
+	//var_dump($games);
+	//var_dump($gameInfo);
+}
+
 if(isset($userInfo)){
 	//var_dump($ftableBody);
-	echo"</br>".$userFriendsTable;
+
+
+	//echo"</br>".$userFriendsTable;
 	//echo"</br>".$tableAchiv;
 	//var_dump($userAchivments);
 	//var_dump($userFriends);

@@ -21,6 +21,24 @@ class SteamUsersModel
 		return $query->fetchAll();
 	}
 
+	public function getUsers()
+	{
+		$sql = "SELECT user_id,persona_name,avatar FROM users LIMIT 20";
+		$query = $this->db->prepare($sql);
+		$query->execute();
+
+		return $query->fetchAll();
+	}
+
+	public function getGames()
+	{
+		$sql = "SELECT game_id,game_name FROM games LIMIT 20";
+		$query = $this->db->prepare($sql);
+		$query->execute();
+
+		return $query->fetchAll();
+	}
+
 	public function deleteUser($user_id)
 	{
 		$sql = "DELETE FROM users WHERE user_id = :user_id";
@@ -81,6 +99,76 @@ class SteamUsersModel
     		return true;
     	}
     	return false;
+    }
+
+    public function checkUserGamesApiResponse($userID, $gameID)
+    {
+    	$sql = "SELECT user_id FROM user_games WHERE user_id = :user_id AND game_id = :game_id";
+    	$query = $this->db->prepare($sql);
+    	$query->execute(array(':user_id'=>$userID, ':game_id'=>$gameID));
+    	if(($query->rowCount())==0){
+    		return true;
+    	}
+    	return false;
+    }
+
+    public function writeUserGames($userID, $gameID)
+    {
+    	$sql = "INSERT INTO user_games (user_id, game_id)
+                VALUES (:user_id, :game_id)";
+        //var_dump($SteamUserData['response']['players'][0]['loccountrycode']);
+        $query = $this->db->prepare($sql);	
+    	$query->bindParam(':user_id', $userID);
+    	$query->bindParam(':game_id', $gameID);	
+    	$query->execute();
+    }
+
+    public function writeUserGamesRealtion($userID, $gameData)
+    {
+    	foreach ($gameData as $game => $id){
+    		if($this->checkUserGamesApiResponse($userID, $gameData[$game]['appid'])){
+    			$this->writeUserGames($userID, $gameData[$game]['appid']);
+    			//echo "zapisalem";
+    		}
+    		//echo $userID.' '.$gameData[$game]['appid'].'/';
+    		//writeUserGames($userID,$gameData[$key]['appid']);
+    	}
+    }
+
+    public function getSteamGameData($gameID)
+    {
+    	$url = "http://store.steampowered.com/api/appdetails?appids=".$gameID;
+    	return $this->getResponse($url);
+    }
+
+    public function isGame($gameID)
+    {
+		$sql = "SELECT game_id FROM games WHERE game_id = :game_id";
+		$query = $this->db->prepare($sql);
+		$query->execute(array(':game_id'=>$gameID));
+		if(($query->rowCount())==0){
+			return true;
+		}
+		return false;
+    }
+
+    
+    public function writeGame($gameID, $gameData)
+    {
+    	$sql = "INSERT INTO games (game_id, game_name, actual_price)
+    			VALUES (:game_id, :game_name, :actual_price)";
+    	$query = $this->db->prepare($sql);
+
+    	$query->bindParam(':game_id', $gameID);
+    	$query->bindParam(':game_name', $gameData[$gameID]['data']['name']);
+    	$query->bindParam(':actual_price', $gameData[$gameID]['data']['price_overview']['final']);
+    	//var_dump($gameData[$gameID]['data']['steam_appid']);
+    	//echo"Game ID z write game to ".$gameID."</br>";
+    	//var_dump($gameData[$gameID]['data']['name']);
+    	//echo"</br>";
+    	//var_dump($gameData[$gameID]['data']['price_overview']['final']);
+    	//echo"</br>";
+    	$query->execute();
     }
 
     public function removeId($friendSteamId, $tableName)

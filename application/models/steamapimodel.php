@@ -22,7 +22,18 @@ class SteamApiModel
 		$string = strip_tags($string);
 		$string = htmlentities($string);
 		return stripcslashes($string);
+	}
 
+	public function getGameInfo($gameID)
+	{
+		$request = "http://store.steampowered.com/api/appdetails?appids=".$gameID;
+		return $this->getResponse($request); 
+	}
+
+	public function getSteamUserGames($steamUserId)
+	{
+		$steamUserGamesRequest = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=".STEAM_API_KEY."&format=json&input_json={\"steamid\":".$steamUserId.",\"include_appinfo\":true,\"include_played_free_games\":false}";
+		return $this -> getResponse($steamUserGamesRequest);
 	}
 
 	public function addUser($SteamUserData)
@@ -75,6 +86,8 @@ class SteamApiModel
 	        }
 	    }
 	}
+
+
 
 }
 ?>

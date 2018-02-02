@@ -8,17 +8,21 @@ class SteamUsers extends Controller
 		/* Page: index.
 
 		*/
-		echo "We are in index fumction in games controller ";
+		//echo "We are in index fumction in games controller ";
 
 		$games_model = $this->loadModel('SteamUsersModel');
-	    $users = $games_model->getAllUsers();
-
+	    $users = $games_model->getUsers();
+	    $steamapimodel = $this->loadModel('SteamApiModel');
 	    $statsModel = $this->loadModel('StatsModel');
-	    $amount_of_users = $statsModel->getAmountOfUsers('user_id','users');
-	    $amountToCheck = $statsModel->getAmountOfUsers('steam_id','steam_users_to_check');
+	    $amount_of_users = $statsModel->getAmountOf('user_id','users');
+	    $amountToCheck = $statsModel->getAmountOf('steam_id','steam_users_to_check');
+	    $amoutOfGames = $statsModel->getAmountOf('game_id','games');
+	    $games = $games_model->getGames();
+	    $gameInfo = $steamapimodel->getGameInfo($games[14]['game_id']);
 
 		require 'application/views/_templates/header.php';
 	    require 'application/views/steamusers/index.php';
+	    require 'application/views/_templates/debug.php';
 	    require 'application/views/_templates/footer.php';
 	}
 
@@ -41,19 +45,42 @@ class SteamUsers extends Controller
 			$user_model = $this->loadModel('SteamUsersModel');
 			$userFriendsModel = $this->loadModel('SteamApiModel');
 			//sanitization of enterned data.
-			$userFriendsModel->sanitizeString(($_POST['steam_user_id']));
-
-			$userInfo = $user_model->searchSteamUser($_POST['steam_user_id']);
+			$userID = $userFriendsModel->sanitizeString(($_POST['steam_user_id']));
+			$userInfo = $user_model->searchSteamUser($userID);
 			$userFriends = $userFriendsModel->getSteamUserFriends($_POST['steam_user_id']);
+			$userGames = $userFriendsModel->getSteamUserGames($userID);
+			if($userGames['response']){
+				foreach($userGames['response']['games'] as $game =>$id){
+
+					if($user_model->isGame($userGames['response']['games'][$game]['appid'])){
+
+						//echo"</br>echo z controllera, to jest $game ".$game."</br>
+						  //  ID z is Game".$userGames['response']['games'][$game]['appid']."</br>";
+						$gameData = $user_model->getSteamGameData($userGames['response']['games'][$game]['appid']); 
+						if($gameData[$userGames['response']['games'][$game]['appid']]['success'] == true){
+							$user_model->writeGame($userGames['response']['games'][$game]['appid'],$gameData);
+					    }
+					}
+					//echo $game."//";
+					
+				}
+				//$user_model->writeUserGamesRealtion($userID, $userGames['response']['games']);
+			}
+
+			/*if($user_model->checkUserGames($userID, 240)){
+				echo "trzeba zapiac bo nie ma </br>";
+			} else {
+				echo "było";
+			}*/
 			//$userArray = $user_model->recursiveResponse($userinfo);
 			//var_dump($user_model->checkUser(76561197997461962));
 			if ($user_model->checkUser($_POST['steam_user_id'])){
 				$userFriendsModel->addUser($userInfo);
-				echo "zapisano";				
+				//echo "zapisano";				
 			} else {
-				echo "taki juz był </br>";
+				//echo "taki juz był </br>";
 			}
-			$userAchivments = $user_model->getPlayerAchivments($_POST['steam_user_id'],39140);
+			//$userAchivments = $user_model->getPlayerAchivments($_POST['steam_user_id'],39140);
 
 			$ftable = $this->loadView('tablesviews');
 			$ftablePass = $ftable->createTableHeader($userFriends['friendslist']['friends'][0]);
@@ -66,7 +93,6 @@ class SteamUsers extends Controller
 			$user_model->checkAllFriends($userFriends['friendslist']['friends']);
 			//var_export($user_model->checkAllSteamUsersToChceck($user_model->getAllSteamUsersToCheck()));
 			//var_export($user_model->getAllSteamUsersToCheck());		
-
 			//$list = $user_model->recursiveResponse($userAchivments);
 
 		}
@@ -101,6 +127,11 @@ class SteamUsers extends Controller
 		header('refresh:5; url='.URL.'steamusers/index');
 		//header('location: '. URL . 'steamusers/index');
 	} 
+
+	public function admin()
+	{
+
+	}
 }
 
 ?>

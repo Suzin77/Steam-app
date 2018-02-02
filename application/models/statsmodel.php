@@ -28,7 +28,7 @@ class StatsModel
         return $query->fetch()->{['amount_of_songs']};
     }
 
-    public function getAmountOfUsers($column, $table)
+    public function getAmountOf($column, $table)
     {
         $sql ="SELECT COUNT($column) AS amount_of_users FROM $table";
         $query = $this->db->prepare($sql);
