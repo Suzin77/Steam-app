@@ -22,7 +22,7 @@ class SteamUsersModel
 
 	public function getAllUsers()
 	{
-		$sql = "SELECT user_id,persona_name,avatar FROM users";
+		$sql = "SELECT user_id,persona_name,avatar FROM users WHERE communityvisibilitystate = 0 ";
 		$query = $this->db->prepare($sql);
 		$query->execute();
 

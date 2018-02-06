@@ -10,16 +10,22 @@ class SteamUsers extends Controller
 		*/
 		//echo "We are in index fumction in games controller ";
 
-		$games_model = $this->loadModel('SteamUsersModel');
-	    $users = $games_model->getUsers();	    
+		//$steamUserModel = $this->loadModel('SteamUsersModel');
+		$steamUserModel = $this->loadModel('SteamUsersModel');
+	    $users = $steamUserModel->getUsers();	    
 	    $steamapimodel = $this->loadModel('SteamApiModel');
 	    $statsModel = $this->loadModel('StatsModel');
 	    $amount_of_users = $statsModel->getAmountOf('user_id','users');
 	    $amountToCheck = $statsModel->getAmountOf('steam_id','steam_users_to_check');
-	    $exampleToCheck = $games_model->getRandomRows('steam_id','steam_users_to_check',10);
+	    $exampleToCheck = $steamUserModel->getRandomRows('steam_id','steam_users_to_check',10);
 	    $amoutOfGames = $statsModel->getAmountOf('game_id','games');
-	    $games = $games_model->getGames();
-	    $gameInfo = $steamapimodel->getGameInfo($games[14]['game_id']);
+	    $games = $steamUserModel->getGames();
+	    //$allUsers = $steamUserModel->getAllUsers();
+
+	    //gams class test
+
+	    $gamesModel = $this -> loadModel('gamesModel');
+	    $gameInfo = $gamesModel->getSteamGameData(672970);
 
 		require 'application/views/_templates/header.php';
 	    require 'application/views/steamusers/index.php';
@@ -30,8 +36,8 @@ class SteamUsers extends Controller
 	public function deleteUser($user_id)
 	{
 		if(isset($user_id)){
-			$games_model = $this->loadModel('SteamUsersModel');
-			$deleteUser = $games_model->deleteUser($user_id);
+			$steamUserModel = $this->loadModel('SteamUsersModel');
+			$deleteUser = $steamUserModel->deleteUser($user_id);
 		}	
 		header('location: ' . URL . 'steamusers/index');
 	}
@@ -42,21 +48,16 @@ class SteamUsers extends Controller
 		If search form are submitted app start to connect with Steam API and return result as an array.
 		*/
 		if(isset($_POST['submit_search_steam_user'])){
-
 			$user_model = $this->loadModel('SteamUsersModel');
-			$userFriendsModel = $this->loadModel('SteamApiModel');
+			$steamApiModel = $this->loadModel('SteamApiModel');
 			//sanitization of enterned data.
-			$userID = $userFriendsModel->sanitizeString(($_POST['steam_user_id']));
+			$userID = $steamApiModel->sanitizeString(($_POST['steam_user_id']));
 			$userInfo = $user_model->searchSteamUser($userID);
-			$userFriends = $userFriendsModel->getSteamUserFriends($_POST['steam_user_id']);
-			$userGames = $userFriendsModel->getSteamUserGames($userID);
+			$userFriends = $steamApiModel->getSteamUserFriends($userID);
+			$userGames = $steamApiModel->getSteamUserGames($userID);
 			if($userGames['response']){
 				foreach($userGames['response']['games'] as $game =>$id){
-
 					if($user_model->isGame($userGames['response']['games'][$game]['appid'])){
-
-						//echo"</br>echo z controllera, to jest $game ".$game."</br>
-						  //  ID z is Game".$userGames['response']['games'][$game]['appid']."</br>";
 						$gameData = $user_model->getSteamGameData($userGames['response']['games'][$game]['appid']); 
 						if($gameData[$userGames['response']['games'][$game]['appid']]['success'] == true){
 							$user_model->writeGame($userGames['response']['games'][$game]['appid'],$gameData);
@@ -74,20 +75,21 @@ class SteamUsers extends Controller
 			//$userArray = $user_model->recursiveResponse($userinfo);
 			//var_dump($user_model->checkUser(76561197997461962));
 			if ($user_model->checkUser($_POST['steam_user_id'])){
-				$userFriendsModel->addUser($userInfo);						
+				$steamApiModel->addUser($userInfo);						
 			} else {
 			}
 			//$userAchivments = $user_model->getPlayerAchivments($_POST['steam_user_id'],39140);
 
 			$ftable = $this->loadView('tablesviews');
-			$ftablePass = $ftable->createTableHeader($userFriends['friendslist']['friends'][0]);
-			$userFriendsTable = $ftable->createTable($userFriends['friendslist']['friends'][0],$userFriends['friendslist']['friends']);
+			if(isset($userFriends['friendslist'])){
+				$ftablePass = $ftable->createTableHeader($userFriends['friendslist']['friends'][0]);
+				$userFriendsTable = $ftable->createTable($userFriends['friendslist']['friends'][0],$userFriends['friendslist']['friends']);
+				$user_model->checkAllFriends($userFriends['friendslist']['friends']);
+			}
 			if(isset($userAchivments)){	
 				$tableAchiv = $ftable->createTable($userAchivments['playerstats']['achievements'][0],$userAchivments['playerstats']['achievements']);
 			}
 			//check of friends
-			
-			$user_model->checkAllFriends($userFriends['friendslist']['friends']);
 			//var_export($user_model->checkAllSteamUsersToChceck($user_model->getAllSteamUsersToCheck()));
 			//var_export($user_model->getAllSteamUsersToCheck());		
 			//$list = $user_model->recursiveResponse($userAchivments);
@@ -106,14 +108,12 @@ class SteamUsers extends Controller
 	{
 		if(isset($userId)){
 			$userModel = $this -> loadModel('SteamUsersModel');
-			$userFriendsModel = $this->loadModel('SteamApiModel');
+			$steamApiModel = $this->loadModel('SteamApiModel');
 			$userInfo = $userModel->searchSteamUser($userId);
 			if ($userModel->checkUser($userId)){
-				$userFriendsModel->addUser($userInfo);
-				$userFriends = $userFriendsModel->getSteamUserFriends($userId);
-				$userModel->checkAllFriends($userFriends['friendslist']['friends']);
-				
-				
+				$steamApiModel->addUser($userInfo);
+				$userFriends = $steamApiModel->getSteamUserFriends($userId);
+				$userModel->checkAllFriends($userFriends['friendslist']['friends']);			
 				echo "zapisano";				
 			} else {
 				echo "taki juz był </br>";
@@ -127,6 +127,20 @@ class SteamUsers extends Controller
 	public function admin()
 	{
 
+	}
+
+	public function updateUser()
+	{
+		$steamUsersModel = $this->loadModel('SteamUsersModel');
+		$steamApiModel = $this->loadModel('SteamApiModel');
+
+		$allUsers = $steamUsersModel->getAllUsers();
+		foreach($allUsers as $key => $value){
+			
+			$userInfo = $steamUsersModel->searchSteamUser($value['user_id']);
+			$steamApiModel->updateSteamUser($userInfo);
+		}
+	header('location: '. URL . 'steamusers/index');	
 	}
 }
 

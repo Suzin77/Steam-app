@@ -53,7 +53,6 @@
                     <td>Artist</td>
                     <td>Track</td>
                     <td>Link</td>
-                    <td>DELETE</td>
                 </tr>
                 </thead>
                 <tbody>

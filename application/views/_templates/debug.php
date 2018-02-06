@@ -9,15 +9,8 @@ if(isset($userGames)){
 	}	
 }
 
-if (isset($games)){ 
-	//var_dump($games);
-	//var_dump($gameInfo);
-}
-
 if(isset($userInfo)){
 	//var_dump($ftableBody);
-
-
 	//echo"</br>".$userFriendsTable;
 	//echo"</br>".$tableAchiv;
 	//var_dump($userAchivments);
@@ -32,7 +25,17 @@ if(isset($userInfo)){
 	}	
 }
 
+if(isset($gameInfo)){
+	$icon = $gameInfo[672970]['data']['header_image'];
+	foreach($gameInfo[672970]['data'] as $key => $value){
+		echo "klucz: <b>".$key."</b> wartosc <b>".$value." </b></br>";
+	}	
+	//var_dump($gameInfo);
+
 ?>
+<img src="<?php echo $icon ?>" style="padding:1px"/>
+<?php } ?>
+<button type="button"><a href= "<?php echo URL . 'steamusers/updateUser'; ?>">Update Me!</a></button>
  <table>
             <thead style="background-color: #ddd; font-weight: bold;">
             <tr>

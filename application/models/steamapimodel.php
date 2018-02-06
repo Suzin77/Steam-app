@@ -1,5 +1,4 @@
 <?php
-
 class SteamApiModel
 {
 	function __construct($db){
@@ -9,6 +8,13 @@ class SteamApiModel
 			exit('Nie udało się połączyć z bazą');
 		}
 	}
+
+	public function loadModel($model_name)
+    {
+        require 'application/models/' . strtolower($model_name) . '.php';
+        // return new model (and pass the database connection to the model)
+        return new $model_name($this->db);
+    }
 	
 
 	public function getSteamUserFriends($steamUserId)
@@ -38,12 +44,12 @@ class SteamApiModel
 
 	public function addUser($SteamUserData)
 	{	
-		$sql = "INSERT INTO users (user_id, persona_name, time_created,lastlogoff,profileurl, realname, loccountry_code, avatar, avatarmedium, avatarfull)
-                VALUES (:steam_id, :persona_name, :time_created, :lastlogoff, :profileurl, :realname, :loccountry_code, :avatar, :avatarmedium, :avatarfull)";
-        //var_dump($SteamUserData['response']['players'][0]['loccountrycode']);
+		$sql = "INSERT INTO users (user_id, persona_name, communityvisibilitystate,time_created,lastlogoff,profileurl, realname, loccountry_code, avatar, avatarmedium, avatarfull)
+                VALUES (:steam_id, :persona_name,:communityvisibilitystate, :time_created, :lastlogoff, :profileurl, :realname, :loccountry_code, :avatar, :avatarmedium, :avatarfull)";
         $query = $this->db->prepare($sql);	
     	$query->bindParam(':steam_id', $SteamUserData['response']['players'][0]['steamid'], PDO::PARAM_STR);
     	$query->bindParam(':persona_name', $SteamUserData['response']['players'][0]['personaname']);
+    	$query->bindParam(':communityvisibilitystate', $SteamUserData['response']['players'][0]['communityvisibilitystate']);
     	$query->bindParam(':time_created', $SteamUserData['response']['players'][0]['timecreated']);
     	$query->bindParam(':lastlogoff', $SteamUserData['response']['players'][0]['lastlogoff']);
     	$query->bindParam(':profileurl', $SteamUserData['response']['players'][0]['profileurl']);
@@ -55,6 +61,21 @@ class SteamApiModel
     	
     	$query->execute();
 
+	}
+
+	public function updateSteamUser($steamUsersData)
+	{
+		$sql="UPDATE users SET communityvisibilitystate = :communityvisibilitystate WHERE user_id = :steam_id";
+		$query = $this->db->prepare($sql);
+		$query->bindParam(':steam_id', $steamUsersData['response']['players'][0]['steamid'], PDO::PARAM_STR);
+		$query->bindParam(':communityvisibilitystate', $steamUsersData['response']['players'][0]['communityvisibilitystate']);
+		$query->execute();		
+	}
+
+	public function echoFromDeepModel()
+	{
+		$massage = $this->loadModel('deepModel');
+		return $massage->echoFromDeep('Terror From The Deep');
 	}
 
 	public function getResponse($url)

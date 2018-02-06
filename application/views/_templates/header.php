@@ -19,19 +19,9 @@
 </head>
 <body>
 <!-- header -->
-<div class="container">
-    <!-- Info -->
-    <div class="where-are-we-box">        
-        The green line is added via JavaScript (to show how to integrate JavaScript).
-    </div>
-    <h1></h1>
-    <!-- demo image -->
-    <h3>Demo image, to show usage of public/img folder</h3>
-    <div>
-        <img src="<?php echo URL; ?>public/img/demo-image.png" />
-    </div>
+<div class="container">    
+    <h1></h1>       
     <!-- navigation -->
-    <h3>Demo Navigation</h3>
     <div class="nav navigation">
         <ul>
             <!-- same like "home" or "home/index" -->
