@@ -1,14 +1,9 @@
 <?php
-class SteamApiModel
-{
-	function __construct($db){
-		try {
-			$this->db = $db;
-		} catch (PDOException $e){
-			exit('Nie udało się połączyć z bazą');
-		}
-	}
 
+include_once 'application/libs/model.php';
+
+class SteamApiModel extends Model
+{
 	public function loadModel($model_name)
     {
         require 'application/models/' . strtolower($model_name) . '.php';
@@ -39,6 +34,7 @@ class SteamApiModel
 	public function getSteamUserGames($steamUserId)
 	{
 		$steamUserGamesRequest = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=".STEAM_API_KEY."&format=json&input_json={\"steamid\":".$steamUserId.",\"include_appinfo\":true,\"include_played_free_games\":false}";
+
 		return $this -> getResponse($steamUserGamesRequest);
 	}
 
@@ -86,7 +82,7 @@ class SteamApiModel
 	    $output = curl_exec($ch);
 	    if ($output === false){ 
 	       echo "Crul error: ".crul_error($ch);
-	    } else {	
+	    } else {
 	       $data = json_decode($output,true);
 	       curl_close ($ch);      
 	       return $data;

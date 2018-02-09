@@ -27,11 +27,9 @@
             <!-- same like "home" or "home/index" -->
             <li class = "btn"><a href="<?php echo URL; ?>">home</a></li>
             <li class = "btn"><a href="<?php echo URL; ?>home/exampleone">exampleone</a></li>
-            <li class = "btn"><a href="<?php echo URL; ?>home/exampletwo">exampletwo</a></li>
-            <!-- "songs" and "songs/index" are the same -->
-            <li class = "btn"><a href="<?php echo URL; ?>songs/">songs/index</a></li>
-            <li class = "btn"><a href ="<?php echo URL; ?>steamusers/">steamusers/index</a></li>
-            <li class = "btn"><a href ="<?php echo URL; ?>steamusers/search">steamusers/search</a></li>
+            <li class = "btn"><a href="<?php echo URL; ?>admin/index">Admin/index</a></li>
+            <li class = "btn"><a href ="<?php echo URL; ?>data/search">Search in DB</a></li>
+            <li class = "btn"><a href ="<?php echo URL; ?>steamAPI/search">Search by API</a></li>
         </ul>
     </div>
     <!-- simple div for javascript output, just to show how to integrate js into this MVC construct -->

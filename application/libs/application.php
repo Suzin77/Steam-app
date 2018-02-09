@@ -28,6 +28,7 @@ class Application
 
         // check for controller: does such a controller exist ?
         if (file_exists('./application/controller/' . $this->url_controller . '.php')) {
+
             
             // if so, then load this file and create this controller
             // example: if controller would be "car", then this line would translate into: $this->car = new car();
@@ -58,6 +59,7 @@ class Application
         } else {
             // invalid URL, so simply show home/index
             require './application/controller/home.php';
+            
             $home = new Home();
             $home->index();
         }
