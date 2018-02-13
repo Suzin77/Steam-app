@@ -2,6 +2,15 @@
 <p>debuger</p>
 <?php
 
+if(isset($countryStatsModel)){
+	$result = array();
+	echo (100- $ratio)."</br>";
+	echo "W odpowiedzi ".$numberOfRows." użytkowników na ".$amountOfUsers." ma dostępną nazwę karaju</br>";
+	echo "Pozostale ".($amountOfUsers-$numberOfRows)." (co stanowi ".(100 - $ratio)."% całości )nie ma takich danych ";
+	//array_count_values($allCountries[0]['loccountry_code']);
+	$temp1=array_values($allCountries);
+}
+
 if(isset($userGames)){
 	if($userGames['response'] != 0){
 		var_dump($userGames['response']['game_count']);
@@ -59,5 +68,31 @@ if(isset($gameInfo)){
             <?php }} ?>
             <!-- end of foreach -->
             </tbody>
+</table>
+
+ <table>
+            <thead style="background-color: #ddd; font-weight: bold;">
+            <tr>
+                <td>KRAJ</td>
+                <td>ILOSC</td>
+                
+         		<td>trzecia</td>>
+                <td>chceck</td>
+            </tr>
+            </thead>
+
+ <tbody>
+            <?php 
+            if(isset($allCountries)){
+            	foreach ($allCountries as $country => $value) { ?>
+                <tr>
+                    <td><?php if (isset($allCountries)) echo $country; ?></td>
+                    <td><?php if (isset($allCountries)) echo $allCountries[$country]; ?></td>
+                    <td><?php if (isset($allCountries)) echo $countryStatsModel-> ratioPerSent($amountOfUsers,$allCountries[$country]); ?></td>                
+                </tr>
+            <?php }} ?>
+            <!-- end of foreach -->
+            </tbody>
+</table>
 
 </div>

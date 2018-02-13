@@ -10,7 +10,7 @@ class SteamAPI extends Controller
 		//echo "We are in index fumction in games controller ";
 		//$steamUserModel = $this->loadModel('SteamUsersModel');
 		echo "jestesmy w klasie ".get_class($this);
-		header('location: ' . URL . 'steamAPI/search');
+		//header('location: ' . URL . 'steamAPI/search');
 	}
 
 	public function deleteUser($user_id)
