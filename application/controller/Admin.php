@@ -10,8 +10,6 @@ class Admin extends Controller
 	    $amountToCheck = $statsModel->getAmountOf('steam_id','steam_users_to_check');
 	    $DataSearchReadModel = $this ->loadModel('DataSearchReadModel');
 	    $exampleToCheck = $DataSearchReadModel->getRandomRows('steam_id','steam_users_to_check',1);
-		//tutuaj damy teplates z przyciskami do aktualizacji danych 
-		//w bazie.
 		$allCountries = $countryStatsModel -> getCountryCode();
 		$numberOfRows = count($allCountries);
 		$allCountries = $countryStatsModel -> countCountries($allCountries);
@@ -45,6 +43,13 @@ class Admin extends Controller
 
 	public function updateMany($howMany)
 	{	
+		/**
+		Funkcja: 
+		-pobiera z listy uzytkowników "do sprawdzenia" identyfikatory
+		-komunikuje sie ze steam aby pobrac infomacje
+		-zapisuje pobrane dane w tabeli users
+		-usuwa zaktualizowne Id z listy "do sprawdzenia"
+		**/
 		if($howMany > 200){
 			$howMany=200;
 		}
@@ -55,9 +60,7 @@ class Admin extends Controller
 			$exampleToCheck = $DataSearchReadModel->getRandomRows('steam_id','steam_users_to_check',1);
 			$userData = $SteamAPISearchReadModel->searchSteamUser($exampleToCheck[0]['steam_id']);
 			$DataSearchWriteModel->addUser($userData);
-			$DataSearchWriteModel-> removeId($exampleToCheck[0]['steam_id'],"steam_users_to_check");
-			//echo "</br>dodano takiego ".$exampleToCheck[0]['steam_id'];
-			//unset($exampleToCheck);
+			$DataSearchWriteModel-> removeId($exampleToCheck[0]['steam_id'],"steam_users_to_check");		
 			header('location: '. URL . 'admin/index');
 		}
 	}
