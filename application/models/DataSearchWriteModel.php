@@ -24,6 +24,12 @@ class DataSearchWriteModel extends Model
 
 	}
 
+    public function addGame($gameData)
+    {
+        $sql = "INSERT INTO games () VALUES ()";
+        $query = $this->db->prepare($sql);
+    }
+
 	public function removeId($SteamID, $tableName)
     {
     	$sql =  "DELETE FROM $tableName WHERE steam_id = :steam_id";
@@ -31,6 +37,15 @@ class DataSearchWriteModel extends Model
     	$query->bindParam(':steam_id', $SteamID );
     	$query->execute();
     	echo "</br> usunięcie wykonane";
+    }
+
+    public function addAnswer($data)
+    {
+
+        $sql = "INSERT INTO posts(answer) VALUES (:answer)";
+        $query = $this->db->prepare($sql); 
+        $query->bindParam(':answer', $data);
+        $query->execute();
     }
 }
 ?>

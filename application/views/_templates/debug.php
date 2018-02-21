@@ -7,7 +7,6 @@ if(isset($countryStatsModel)){
 	echo (100- $ratio)."</br>";
 	echo "W odpowiedzi ".$numberOfRows." użytkowników na ".$amountOfUsers." ma dostępną nazwę karaju</br>";
 	echo "Pozostale ".($amountOfUsers-$numberOfRows)." (co stanowi ".(100 - $ratio)."% całości )nie ma takich danych ";
-	//array_count_values($allCountries[0]['loccountry_code']);
 	$temp1=array_values($allCountries);
 }
 

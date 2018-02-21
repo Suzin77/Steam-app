@@ -30,6 +30,7 @@ class SteamAPI extends Controller
 		$userModel = $this->loadModel('SteamUsersModel');
 		$DataSearchReadModel = $this ->loadModel('DataSearchReadModel');
 		$exampleToCheck = $DataSearchReadModel->getRandomRows('steam_id','steam_users_to_check',10);
+		$DataSearchWriteModel = $this->loadModel('DataSearchWriteModel');
 		$steamApiModel = $this->loadModel('SteamApiModel');		
 		if(isset($_POST['submit_search_steam_user'])){			
 			//sanitization of enterned data.
@@ -59,7 +60,7 @@ class SteamAPI extends Controller
 			//$userArray = $user_model->recursiveResponse($userinfo);
 			//var_dump($user_model->checkUser(76561197997461962));
 			if ($userModel->checkUser($_POST['steam_user_id'])){
-				$steamApiModel->addUser($userInfo);						
+				$DataSearchWriteModel->addUser($userInfo);						
 			} else {
 			}
 			//$userAchivments = $user_model->getPlayerAchivments($_POST['steam_user_id'],39140);
@@ -93,9 +94,10 @@ class SteamAPI extends Controller
 		if(isset($userId)){
 			$userModel = $this -> loadModel('SteamUsersModel');
 			$steamApiModel = $this->loadModel('SteamApiModel');
+			$DataSearchReadModel = $this ->loadModel('DataSearchReadModel');
 			$userInfo = $userModel->searchSteamUser($userId);
 			if ($userModel->checkUser($userId)){
-				$steamApiModel->addUser($userInfo);
+				$DataSearchReadModel->addUser($userInfo);
 				$userFriends = $steamApiModel->getSteamUserFriends($userId);
 				$userModel->checkAllFriends($userFriends['friendslist']['friends']);			
 				echo "zapisano";				

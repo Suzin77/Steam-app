@@ -14,9 +14,6 @@ class Data extends Controller
 	    $amoutOfGames = $statsModel->getAmountOf('game_id','games');
 	    $games = $steamUserModel->getGames();
 	    //$allUsers = $DataSearchReadModel->getAllUsers();
-
-	    //gams class test
-
 	    //$gamesModel = $this -> loadModel('gamesModel');
 	    //$gameInfo = $gamesModel->getSteamGameData(672970);
 

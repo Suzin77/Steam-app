@@ -16,8 +16,6 @@ class Admin extends Controller
 		arsort($allCountries);
 		$ratio = $countryStatsModel-> ratioPerSent($amountOfUsers,$numberOfRows);
 
-
-
 		require 'application/views/_templates/header.php'; 
 		require 'application/views/admin/admin.php';    
 	    require 'application/views/_templates/debug.php';
@@ -49,6 +47,7 @@ class Admin extends Controller
 		-komunikuje sie ze steam aby pobrac infomacje
 		-zapisuje pobrane dane w tabeli users
 		-usuwa zaktualizowne Id z listy "do sprawdzenia"
+
 		**/
 		if($howMany > 200){
 			$howMany=200;
@@ -69,6 +68,29 @@ class Admin extends Controller
 	{
 		$updateModel = $this->loadModel('Update');
 		$updateModel->UpdateUsers(1);
+	}
+
+	public function pytania()
+	{
+		require 'application/views/_templates/header.php'; 
+		require 'application/views/_templates/pytania.php';
+		require 'application/views/_templates/footer.php';
+	}
+
+	public function answer()
+	{
+		$DataSearchWriteModel = $this->loadModel('DataSearchWriteModel');
+		$steamApiModel = $this->loadModel('SteamApiModel');
+					
+		if(isset($_POST['answer'])&& !empty($_POST['answer'])){			
+			//sanitization of enterned data.
+			$answer = $steamApiModel->sanitizeString(($_POST['answer']));
+			$DataSearchWriteModel->addAnswer($answer);
+			header('location: '. URL . 'admin/pytania');
+
+		} else {
+			echo "Proszę wróc i uzupełnij formularz. Naprawde potrzbuje tych odpowiedzi ;)";
+		}			
 	}
 }
 ?>
