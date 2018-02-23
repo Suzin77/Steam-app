@@ -32,10 +32,10 @@ if(isset($userInfo)){
 		echo "klucz: <b>".$key."</b> wartosc <b>".$value." </b></br>";
 	}	
 }
-
+var_dump($gameInfo);
 if(isset($gameInfo)){
-	$icon = $gameInfo[672970]['data']['header_image'];
-	foreach($gameInfo[672970]['data'] as $key => $value){
+	$icon = $gameInfo[$gameID]['data']['header_image'];
+	foreach($gameInfo[$gameID]['data'] as $key => $value){
 		echo "klucz: <b>".$key."</b> wartosc <b>".$value." </b></br>";
 	}	
 	//var_dump($gameInfo);
@@ -62,7 +62,7 @@ if(isset($gameInfo)){
                     <td><?php if (isset($friend['steamid'])) echo $friend['steamid']; ?></td>
                     <td><?php if (isset($friend['friend_since'])) echo $friend['friend_since']; ?></td>
                     <td><?php if (isset($friend['relation'])) echo $friend['relation']; ?></td>                 
-                    <td><a href="<?php echo URL . 'steamusers/checkUser/' . $friend['steamid']; ?>">CHECK</a></td>
+                    <td><a href="<?php echo URL . 'steamAPI/checkUser/' . $friend['steamid']; ?>">CHECK</a></td>
                 </tr>
             <?php }} ?>
             <!-- end of foreach -->

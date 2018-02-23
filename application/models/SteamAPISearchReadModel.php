@@ -11,25 +11,24 @@ class SteamAPISearchReadModel extends Model
 		return  $this -> getResponse($request);
 	}
 
+	public function getSteamGameData($gameID)
+    {
+    	$url = "http://store.steampowered.com/api/appdetails?appids=".$gameID;
+    	return $this->getResponse($url);
+    }
+
 	public function createSteamUserInfoRequest($steamUserId)
     {   	
 	    $steamUserInfoRequest = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=".STEAM_API_KEY."&steamids=".$steamUserId."&format=json";   		
 	    return $steamUserInfoRequest;
     }
 
-	public function getResponse($url)
-    {
-    	$ch = curl_init();
-	    curl_setopt($ch, CURLOPT_URL,$url);
-	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	    $output = curl_exec($ch);
-	    if ($output === false){ 
-	       echo "Crul error: ".crul_error($ch);
-	    } else {	
-	       $data = json_decode($output,true);
-	       curl_close ($ch);      
-	       return $data;
-	    }
+    public function getPlayerAchivments($steamUserId, $appId)//example of game 225160
+    {   
+    	$request = "http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=".$appId."&key=".STEAM_API_KEY."&steamid=".$steamUserId;	
+		return $this -> getResponse($request);
     }
+
+	
 }
 ?>

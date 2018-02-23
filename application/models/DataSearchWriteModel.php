@@ -47,5 +47,11 @@ class DataSearchWriteModel extends Model
         $query->bindParam(':answer', $data);
         $query->execute();
     }
+
+    public function deleteUser($user_id)
+    {
+        $sql = "DELETE FROM users WHERE user_id = :user_id";
+        $query = $this->db->prepare($sql);
+        $query->execute(array(':user_id'=> $user_id));
+    }    
 }
-?>

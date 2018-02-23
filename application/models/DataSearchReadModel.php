@@ -18,6 +18,35 @@ class DataSearchReadModel extends Model
 		$query->execute();
 		return $query->fetchAll();
 	}
+
+	public function getUsers()
+	{
+		$sql = "SELECT user_id,persona_name,avatar FROM users ORDER BY rand() LIMIT 20";
+		$query = $this->db->prepare($sql);
+		$query->execute();
+		return $query->fetchAll();
+	}
+
+	public function getGames()
+	{
+		$sql = "SELECT game_id,game_name FROM games ORDER BY rand() LIMIT 20";
+		$query = $this->db->prepare($sql);
+		$query->execute();
+		return $query->fetchAll();
+	}
+
+	public function isGame($gameID)
+    {
+		$sql = "SELECT game_id FROM games WHERE game_id = :game_id";
+		$query = $this->db->prepare($sql);
+		$query->execute(array(':game_id'=>$gameID));
+		if(($query->rowCount())==0){
+			return true;
+		}
+		return false;
+    }
+
+
 	
 }
 ?>

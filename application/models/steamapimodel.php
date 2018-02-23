@@ -55,20 +55,7 @@ class SteamApiModel extends Model
 		return $massage->echoFromDeep('Terror From The Deep');
 	}
 
-	public function getResponse($url)
-    {
-    	$ch = curl_init();
-	    curl_setopt($ch, CURLOPT_URL,$url);
-	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	    $output = curl_exec($ch);
-	    if ($output === false){ 
-	       echo "Crul error: ".crul_error($ch);
-	    } else {
-	       $data = json_decode($output,true);
-	       curl_close ($ch);      
-	       return $data;
-	    }
-    }
+	
 
     public function recursiveResponse($array, $level = 1)
     {

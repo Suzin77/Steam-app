@@ -3,6 +3,8 @@
 include_once 'application/libs/model.php';
 class SteamUsersModel extends Model
 {
+    /* 
+    ** przeniesiona do datasearchreadmodel
 	public function getUsers()
 	{
 		$sql = "SELECT user_id,persona_name,avatar FROM users ORDER BY rand() LIMIT 20";
@@ -10,15 +12,16 @@ class SteamUsersModel extends Model
 		$query->execute();
 		return $query->fetchAll();
 	}
-
-	public function getGames()
+    
+    **metoda jest w DataReadModel
+    public function getGames()
 	{
 		$sql = "SELECT game_id,game_name FROM games ORDER BY rand() LIMIT 20";
 		$query = $this->db->prepare($sql);
 		$query->execute();
 		return $query->fetchAll();
 	}
-
+  
 	public function deleteUser($user_id)
 	{
 		$sql = "DELETE FROM users WHERE user_id = :user_id";
@@ -27,28 +30,29 @@ class SteamUsersModel extends Model
 
 	}
 
-	public function searchSteamUser($steamUserId)
+	
+    metoda/y juz jest w SteamAPISearchReadModel
+    public function searchSteamUser($steamUserId)
 	{
 		$request = $this -> createSteamUserInfoRequest($steamUserId);
 		return  $this -> getResponse($request);
 	}
+    
 
 	public function createSteamUserInfoRequest($steamUserId)
     {   	
 	    $steamUserInfoRequest = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=".STEAM_API_KEY."&steamids=".$steamUserId."&format=json";   		
 	    return $steamUserInfoRequest;
     }
-
+    */
+    /*
     public function getPlayerAchivments($steamUserId, $appId)//example of game 225160
     {   
     	$request = "http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=".$appId."&key=".STEAM_API_KEY."&steamid=".$steamUserId;	
 		return $this -> getResponse($request);
     }
 
-    public function getGameInfo($appId)
-    {
-    	return $this -> getResponse("http://store.steampowered.com/api/appdetails?appids=".$appId);
-    }
+    */
 
     public function addFriend($firendSteamId)
     {
@@ -68,7 +72,6 @@ class SteamUsersModel extends Model
     	}
     	return false;
     }
-
 
     public function checkFriend($firendSteamId)
     {
@@ -114,12 +117,13 @@ class SteamUsersModel extends Model
     		//writeUserGames($userID,$gameData[$key]['appid']);
     	}
     }
-
+    /* jest w steamAPISearchReadModel
     public function getSteamGameData($gameID)
     {
     	$url = "http://store.steampowered.com/api/appdetails?appids=".$gameID;
     	return $this->getResponse($url);
     }
+    
 
     public function isGame($gameID)
     {
@@ -131,6 +135,7 @@ class SteamUsersModel extends Model
 		}
 		return false;
     }
+    */
 
     
     public function writeGame($gameID, $gameData)
@@ -150,15 +155,16 @@ class SteamUsersModel extends Model
     	//echo"</br>";
     	$query->execute();
     }
-
-    public function removeId($friendSteamId, $tableName)
+    /*
+    public function removeId($SteamId, $tableName)
     {
     	$sql =  "DELETE FROM $tableName WHERE steam_id = :steam_id";
     	$query = $this->db->prepare($sql);
-    	$query->bindParam(':steam_id', $friendSteamId );
+    	$query->bindParam(':steam_id', $SteamId );
     	$query->execute();
     	echo "</br> usunięcie wykonane";
     }
+    */
 
     public function checkAllFriends($data)
     {			
@@ -189,7 +195,7 @@ class SteamUsersModel extends Model
     	}
     }
 
-
+/* jest w model.php
     public function getResponse($url)
     {
     	$ch = curl_init();
@@ -205,6 +211,7 @@ class SteamUsersModel extends Model
 	    }
     }
 
+*/
     public function recursiveResponse($array, $level = 1)
     {
 	    foreach($array as $key => $value){

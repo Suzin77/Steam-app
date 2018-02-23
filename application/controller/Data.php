@@ -3,19 +3,24 @@ class Data extends Controller
 {
 	public function search()
 	{
+		$SteamAPISearchReadModel = $this->loadModel('SteamAPISearchReadModel');
 		$steamUserModel = $this->loadModel('SteamUsersModel');
 		$DataSearchReadModel = $this ->loadModel('DataSearchReadModel');
-	    $users = $steamUserModel->getUsers();	    
+	    $users = $DataSearchReadModel->getUsers();	    
 	    $steamapimodel = $this->loadModel('SteamApiModel');
 	    $statsModel = $this->loadModel('StatsModel');
 	    $amount_of_users = $statsModel->getAmountOf('user_id','users');
 	    $amountToCheck = $statsModel->getAmountOf('steam_id','steam_users_to_check');
 	    $exampleToCheck = $DataSearchReadModel->getRandomRows('steam_id','steam_users_to_check',10);
 	    $amoutOfGames = $statsModel->getAmountOf('game_id','games');
-	    $games = $steamUserModel->getGames();
+	    $games = $DataSearchReadModel->getGames();
+
 	    //$allUsers = $DataSearchReadModel->getAllUsers();
 	    //$gamesModel = $this -> loadModel('gamesModel');
-	    //$gameInfo = $gamesModel->getSteamGameData(672970);
+	    //var_dump($games);
+	    $gameID = $games[0]['game_id'];
+
+	    $gameInfo = $SteamAPISearchReadModel->getSteamGameData($gameID);
 
 		require 'application/views/_templates/header.php';
 	    require 'application/views/steamusers/index.php';

@@ -16,8 +16,8 @@ class SteamAPI extends Controller
 	public function deleteUser($user_id)
 	{
 		if(isset($user_id)){
-			$steamUserModel = $this->loadModel('SteamUsersModel');
-			$deleteUser = $steamUserModel->deleteUser($user_id);
+			$DataSearchWriteModel = $this->loadModel('DataSearchWriteModel');
+			$DataSearchWriteModel->deleteUser($user_id);
 		}	
 		header('location: ' . URL . 'steamAPI/search');
 	}
@@ -27,6 +27,7 @@ class SteamAPI extends Controller
 		/* Page Search.
 		If search form are submitted app start to connect with Steam API and return result as an array.
 		*/
+		$SteamAPISearchReadModel = $this -> loadModel('SteamAPISearchReadModel');
 		$userModel = $this->loadModel('SteamUsersModel');
 		$DataSearchReadModel = $this ->loadModel('DataSearchReadModel');
 		$exampleToCheck = $DataSearchReadModel->getRandomRows('steam_id','steam_users_to_check',10);
@@ -35,14 +36,14 @@ class SteamAPI extends Controller
 		if(isset($_POST['submit_search_steam_user'])){			
 			//sanitization of enterned data.
 			$_POST['steam_user_id'] = $steamApiModel->sanitizeString(($_POST['steam_user_id']));
-			$userInfo = $userModel->searchSteamUser($_POST['steam_user_id']);
+			$userInfo = $SteamAPISearchReadModel->searchSteamUser($_POST['steam_user_id']);
 			$userFriends = $steamApiModel->getSteamUserFriends($_POST['steam_user_id']);
 			$userGames = $steamApiModel->getSteamUserGames($_POST['steam_user_id']);
 			//var_dump($userGames);
 			/*
 			if($userGames['response']){
 				foreach($userGames['response']['games'] as $game =>$id){
-					if($userModel->isGame($userGames['response']['games'][$game]['appid'])){
+					if($DataSearchReadModel->isGame($userGames['response']['games'][$game]['appid'])){
 						$gameData = $userModel->getSteamGameData($userGames['response']['games'][$game]['appid']); 
 						if($gameData[$userGames['response']['games'][$game]['appid']]['success'] == true){
 							$userModel->writeGame($userGames['response']['games'][$game]['appid'],$gameData);
@@ -63,7 +64,7 @@ class SteamAPI extends Controller
 				$DataSearchWriteModel->addUser($userInfo);						
 			} else {
 			}
-			//$userAchivments = $user_model->getPlayerAchivments($_POST['steam_user_id'],39140);
+			
 
 			$ftable = $this->loadView('tablesviews');
 			if(isset($userFriends['friendslist'])){
@@ -77,7 +78,7 @@ class SteamAPI extends Controller
 			//check of friends
 			//var_export($user_model->checkAllSteamUsersToChceck($user_model->getAllSteamUsersToCheck()));
 			//var_export($user_model->getAllSteamUsersToCheck());		
-			//$list = $user_model->recursiveResponse($userAchivments);
+			//$list = $SteamAPISearchReadModel->recursiveResponse($userAchivments);
 
 		}
 			
@@ -92,22 +93,23 @@ class SteamAPI extends Controller
 	public function checkUser($userId)
 	{
 		if(isset($userId)){
+			$SteamAPISearchReadModel = $this -> loadModel('SteamAPISearchReadModel');
 			$userModel = $this -> loadModel('SteamUsersModel');
 			$steamApiModel = $this->loadModel('SteamApiModel');
-			$DataSearchReadModel = $this ->loadModel('DataSearchReadModel');
-			$userInfo = $userModel->searchSteamUser($userId);
+			$DataSearchWriteModel = $this ->loadModel('DataSearchWriteModel');
+			$userInfo = $SteamAPISearchReadModel->searchSteamUser($userId);
 			if ($userModel->checkUser($userId)){
-				$DataSearchReadModel->addUser($userInfo);
+				$DataSearchWriteModel->addUser($userInfo);
 				$userFriends = $steamApiModel->getSteamUserFriends($userId);
 				$userModel->checkAllFriends($userFriends['friendslist']['friends']);			
 				echo "zapisano";				
 			} else {
 				echo "taki juz był </br>";
 			}
-			$userModel->removeId($userId, "steam_users_to_check");
+			$DataSearchWriteModel->removeId($userId, "steam_users_to_check");
 		}
-		header('refresh:5; url='.URL.'steamusers/index');
-		//header('location: '. URL . 'steamusers/index');
+		//header('refresh:5; url='.URL.'steamAPI/search');
+		header('location: '. URL . 'steamAPI/search');
 	} 
 
 	public function admin()
@@ -117,13 +119,14 @@ class SteamAPI extends Controller
 
 	public function updateUser()
 	{
+		$SteamAPISearchReadModel = $this -> loadModel('SteamAPISearchReadModel');
 		$steamUsersModel = $this->loadModel('SteamUsersModel');
 		$steamApiModel = $this->loadModel('SteamApiModel');
 
 		$allUsers = $steamUsersModel->getAllUsers();
 		foreach($allUsers as $key => $value){
 			
-			$userInfo = $steamUsersModel->searchSteamUser($value['user_id']);
+			$userInfo = $SteamAPISearchReadModel->searchSteamUser($value['user_id']);
 			$steamApiModel->updateSteamUser($userInfo);
 		}
 	header('location: '. URL . 'steamusers/index');	
