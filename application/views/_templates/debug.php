@@ -32,7 +32,7 @@ if(isset($userInfo)){
 		echo "klucz: <b>".$key."</b> wartosc <b>".$value." </b></br>";
 	}	
 }
-var_dump($gameInfo);
+//var_dump($gameInfo);
 if(isset($gameInfo)){
 	$icon = $gameInfo[$gameID]['data']['header_image'];
 	foreach($gameInfo[$gameID]['data'] as $key => $value){

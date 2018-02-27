@@ -1,5 +1,4 @@
 <?php
-include_once 'application/libs/model.php';
 
 class SteamAPISearchReadModel extends Model
 {
@@ -25,9 +24,16 @@ class SteamAPISearchReadModel extends Model
 
     public function getPlayerAchivments($steamUserId, $appId)//example of game 225160
     {   
-    	$request = "http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=".$appId."&key=".STEAM_API_KEY."&steamid=".$steamUserId;	
-		return $this -> getResponse($request);
+        $request = "http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=".$appId."&key=".STEAM_API_KEY."&steamid=".$steamUserId;	
+	    return $this -> getResponse($request);
     }
+
+    public function getSteamUserGames($steamUserId)
+	{
+	    $steamUserGamesRequest = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=".STEAM_API_KEY."&format=json&input_json={\"steamid\":".$steamUserId.",\"include_appinfo\":true,\"include_played_free_games\":false}";
+
+	    return $this -> getResponse($steamUserGamesRequest);
+	}
 
 	
 }

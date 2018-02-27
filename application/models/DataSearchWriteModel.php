@@ -1,5 +1,4 @@
 <?php 
-include_once 'application/libs/model.php';
 
 class DataSearchWriteModel extends Model
 {

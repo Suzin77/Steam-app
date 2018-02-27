@@ -7,7 +7,6 @@ class SteamAPI extends Controller
     {
 		/* Page: index.
 		*/
-		//echo "We are in index fumction in games controller ";
 		//$steamUserModel = $this->loadModel('SteamUsersModel');
 		echo "jestesmy w klasie ".get_class($this);
 		//header('location: ' . URL . 'steamAPI/search');
@@ -38,7 +37,7 @@ class SteamAPI extends Controller
 			$_POST['steam_user_id'] = $steamApiModel->sanitizeString(($_POST['steam_user_id']));
 			$userInfo = $SteamAPISearchReadModel->searchSteamUser($_POST['steam_user_id']);
 			$userFriends = $steamApiModel->getSteamUserFriends($_POST['steam_user_id']);
-			$userGames = $steamApiModel->getSteamUserGames($_POST['steam_user_id']);
+			$userGames = $SteamAPISearchReadModel->getSteamUserGames($_POST['steam_user_id']);
 			//var_dump($userGames);
 			/*
 			if($userGames['response']){

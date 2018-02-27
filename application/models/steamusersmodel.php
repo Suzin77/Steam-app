@@ -1,6 +1,5 @@
 <?php
 
-include_once 'application/libs/model.php';
 class SteamUsersModel extends Model
 {
     /* 

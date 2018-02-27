@@ -1,6 +1,6 @@
 <?php
 
-include_once 'application/libs/model.php';
+//include_once 'application/libs/model.php';
 
 class SteamApiModel extends Model
 {
@@ -31,13 +31,14 @@ class SteamApiModel extends Model
 		return $this->getResponse($request); 
 	}
 
+	/* przeniesienie do steamAPireadModel
 	public function getSteamUserGames($steamUserId)
 	{
 		$steamUserGamesRequest = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=".STEAM_API_KEY."&format=json&input_json={\"steamid\":".$steamUserId.",\"include_appinfo\":true,\"include_played_free_games\":false}";
 
 		return $this -> getResponse($steamUserGamesRequest);
 	}
-
+    */
 	
 
 	public function updateSteamUser($steamUsersData)
