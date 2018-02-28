@@ -5,7 +5,18 @@ class DataSearchWriteModel extends Model
 	public function addUser($SteamUserData)
 	{	
 		$sql = "INSERT INTO users (user_id, persona_name, communityvisibilitystate,time_created,lastlogoff,profileurl, realname, loccountry_code, avatar, avatarmedium, avatarfull)
-                VALUES (:steam_id, :persona_name,:communityvisibilitystate, :time_created, :lastlogoff, :profileurl, :realname, :loccountry_code, :avatar, :avatarmedium, :avatarfull)";
+                VALUES (
+                    :steam_id, 
+                    :persona_name,
+                    :communityvisibilitystate, 
+                    :time_created, 
+                    :lastlogoff, 
+                    :profileurl, 
+                    :realname, 
+                    :loccountry_code, 
+                    :avatar, 
+                    :avatarmedium, 
+                    :avatarfull)";
         $query = $this->db->prepare($sql);	
     	$query->bindParam(':steam_id', $SteamUserData['response']['players'][0]['steamid'], PDO::PARAM_STR);
     	$query->bindParam(':persona_name', $SteamUserData['response']['players'][0]['personaname']);
@@ -52,5 +63,12 @@ class DataSearchWriteModel extends Model
         $sql = "DELETE FROM users WHERE user_id = :user_id";
         $query = $this->db->prepare($sql);
         $query->execute(array(':user_id'=> $user_id));
+    }
+
+    public function addFriend($firendSteamId)
+    {
+        $sql = "INSERT INTO steam_users_to_check (steam_id) VALUES (:steam_id)";
+        $query = $this->db->prepare($sql);
+        $query->execute(array(':steam_id'=>$firendSteamId));
     }    
 }

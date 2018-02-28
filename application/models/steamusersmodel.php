@@ -52,14 +52,16 @@ class SteamUsersModel extends Model
     }
 
     */
-
+    /* dodalem do datasearchwritemodel
     public function addFriend($firendSteamId)
     {
     	$sql = "INSERT INTO steam_users_to_check (steam_id) VALUES (:steam_id)";
     	$query = $this->db->prepare($sql);
     	$query->execute(array(':steam_id'=>$firendSteamId));
     }
+    */
 
+    /*
     public function checkUser($userId)
     {
     	$sql = "SELECT user_id FROM users WHERE user_id = :steam_id";
@@ -71,7 +73,8 @@ class SteamUsersModel extends Model
     	}
     	return false;
     }
-
+    */
+    /*
     public function checkFriend($firendSteamId)
     {
     	$sql = "SELECT steam_id FROM steam_users_to_check WHERE steam_id = :steam_id";
@@ -82,6 +85,7 @@ class SteamUsersModel extends Model
     	}
     	return false;
     }
+    */
 
     public function checkUserGamesApiResponse($userID, $gameID)
     {
@@ -164,7 +168,7 @@ class SteamUsersModel extends Model
     	echo "</br> usunięcie wykonane";
     }
     */
-
+    /*
     public function checkAllFriends($data)
     {			
     	foreach ($data as $key => $value){
@@ -173,7 +177,7 @@ class SteamUsersModel extends Model
     		}
     	}
     }
-
+    */
     public function getAllSteamUsersToCheck()
     {
     	$sql = "SELECT steam_id FROM steam_users_to_check";

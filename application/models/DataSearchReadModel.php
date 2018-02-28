@@ -1,5 +1,5 @@
 <?php 
-include_once 'application/libs/model.php';
+//include_once 'application/libs/model.php';
 
 class DataSearchReadModel extends Model
 {
@@ -44,6 +44,40 @@ class DataSearchReadModel extends Model
 			return true;
 		}
 		return false;
+    }
+
+    public function checkUser($userId)
+    {
+    	$sql = "SELECT user_id FROM users WHERE user_id = :steam_id";
+    	$query = $this->db->prepare($sql);    	
+    	$query->bindParam(':steam_id', $userId, PDO::PARAM_STR);
+    	$query->execute();
+    	if(($query->rowCount()) == 0){
+    	    return true;  	    	
+    	}
+    	return false;
+    }
+
+    public function checkFriend($firendSteamId)
+    {
+    	$sql = "SELECT steam_id FROM steam_users_to_check WHERE steam_id = :steam_id";
+    	$query = $this->db->prepare($sql);
+    	$query->execute(array(':steam_id'=>$firendSteamId));
+    	if(($query->rowCount())== 0 ){
+    		return true;
+    	}
+    	return false;
+    }
+
+    public function checkAllFriends($data, $model)
+    {			
+    	foreach ($data as $key => $value){
+    		if (($this->checkFriend($data[$key]['steamid']))){
+    			
+    			$model->addFriend($data[$key]['steamid']);
+    			//$this->addFriend($data[$key]['steamid']);
+    		}
+    	}
     }
 
 

@@ -35,6 +35,12 @@ class SteamAPISearchReadModel extends Model
 	    return $this -> getResponse($steamUserGamesRequest);
 	}
 
+	public function getSteamUserFriends($steamUserId)
+	{		
+		$steamUserFriendsRequest = "http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=".STEAM_API_KEY."&steamid=".$steamUserId."&relationship=friend";
+		return $this->getResponse($steamUserFriendsRequest);
+	}
+
 	
 }
 ?>

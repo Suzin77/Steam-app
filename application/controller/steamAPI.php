@@ -29,14 +29,14 @@ class SteamAPI extends Controller
 		$SteamAPISearchReadModel = $this -> loadModel('SteamAPISearchReadModel');
 		$userModel = $this->loadModel('SteamUsersModel');
 		$DataSearchReadModel = $this ->loadModel('DataSearchReadModel');
-		$exampleToCheck = $DataSearchReadModel->getRandomRows('steam_id','steam_users_to_check',10);
 		$DataSearchWriteModel = $this->loadModel('DataSearchWriteModel');
-		$steamApiModel = $this->loadModel('SteamApiModel');		
+		$steamApiModel = $this->loadModel('SteamApiModel');
+		$exampleToCheck = $DataSearchReadModel->getRandomRows('steam_id','steam_users_to_check',10);	
 		if(isset($_POST['submit_search_steam_user'])){			
 			//sanitization of enterned data.
 			$_POST['steam_user_id'] = $steamApiModel->sanitizeString(($_POST['steam_user_id']));
 			$userInfo = $SteamAPISearchReadModel->searchSteamUser($_POST['steam_user_id']);
-			$userFriends = $steamApiModel->getSteamUserFriends($_POST['steam_user_id']);
+			$userFriends = $SteamAPISearchReadModel->getSteamUserFriends($_POST['steam_user_id']);
 			$userGames = $SteamAPISearchReadModel->getSteamUserGames($_POST['steam_user_id']);
 			//var_dump($userGames);
 			/*
@@ -59,7 +59,7 @@ class SteamAPI extends Controller
 			}*/
 			//$userArray = $user_model->recursiveResponse($userinfo);
 			//var_dump($user_model->checkUser(76561197997461962));
-			if ($userModel->checkUser($_POST['steam_user_id'])){
+			if ($DataSearchReadModel->checkUser($_POST['steam_user_id'])){
 				$DataSearchWriteModel->addUser($userInfo);						
 			} else {
 			}
@@ -69,7 +69,7 @@ class SteamAPI extends Controller
 			if(isset($userFriends['friendslist'])){
 				$ftablePass = $ftable->createTableHeader($userFriends['friendslist']['friends'][0]);
 				$userFriendsTable = $ftable->createTable($userFriends['friendslist']['friends'][0],$userFriends['friendslist']['friends']);
-				$userModel->checkAllFriends($userFriends['friendslist']['friends']);
+				$DataSearchReadModel->checkAllFriends($userFriends['friendslist']['friends'], $DataSearchWriteModel);
 			}
 			if(isset($userAchivments)){	
 				$tableAchiv = $ftable->createTable($userAchivments['playerstats']['achievements'][0],$userAchivments['playerstats']['achievements']);
@@ -92,15 +92,16 @@ class SteamAPI extends Controller
 	public function checkUser($userId)
 	{
 		if(isset($userId)){
+            $DataSearchReadModel = $this ->loadModel('DataSearchReadModel');
 			$SteamAPISearchReadModel = $this -> loadModel('SteamAPISearchReadModel');
 			$userModel = $this -> loadModel('SteamUsersModel');
 			$steamApiModel = $this->loadModel('SteamApiModel');
 			$DataSearchWriteModel = $this ->loadModel('DataSearchWriteModel');
 			$userInfo = $SteamAPISearchReadModel->searchSteamUser($userId);
-			if ($userModel->checkUser($userId)){
+			if ($DataSearchReadModel->checkUser($userId)){
 				$DataSearchWriteModel->addUser($userInfo);
-				$userFriends = $steamApiModel->getSteamUserFriends($userId);
-				$userModel->checkAllFriends($userFriends['friendslist']['friends']);			
+				$userFriends = $SteamAPISearchReadModel->getSteamUserFriends($userId);
+				$DataSearchReadModel->checkAllFriends($userFriends['friendslist']['friends'],$DataSearchWriteModel);			
 				echo "zapisano";				
 			} else {
 				echo "taki juz był </br>";
@@ -121,7 +122,6 @@ class SteamAPI extends Controller
 		$SteamAPISearchReadModel = $this -> loadModel('SteamAPISearchReadModel');
 		$steamUsersModel = $this->loadModel('SteamUsersModel');
 		$steamApiModel = $this->loadModel('SteamApiModel');
-
 		$allUsers = $steamUsersModel->getAllUsers();
 		foreach($allUsers as $key => $value){
 			
