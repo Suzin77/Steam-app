@@ -33,7 +33,12 @@ if(isset($userInfo)){
 	}	
 }
 //var_dump($gameInfo);
+
+
 if(isset($gameInfo)){
+
+   var_dump($gameInfo["url"]);
+   echo "<pre>".var_export($gameInfo,true)."</pre>";
 	$icon = $gameInfo[$gameID]['data']['header_image'];
 	foreach($gameInfo[$gameID]['data'] as $key => $value){
 		echo "klucz: <b>".$key."</b> wartosc <b>".$value." </b></br>";
@@ -43,7 +48,7 @@ if(isset($gameInfo)){
 ?>
 <img src="<?php echo $icon ?>" style="padding:1px"/>
 <?php } ?>
-<button type="button"><a href= "<?php echo URL . 'steamusers/updateUser'; ?>">Update Me!</a></button>
+<button type="button" class = "btn btn-default""><a href= "<?php echo URL . 'steamusers/updateUser'; ?>">Update Me!</a></button>
  <table>
             <thead style="background-color: #ddd; font-weight: bold;">
             <tr>

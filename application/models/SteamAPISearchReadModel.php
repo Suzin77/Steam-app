@@ -13,7 +13,7 @@ class SteamAPISearchReadModel extends Model
 	public function getSteamGameData($gameID)
     {
     	$url = "http://store.steampowered.com/api/appdetails?appids=".$gameID;
-    	return $this->getResponse($url);
+    	return array("url" => $url , "response"=> $this->getResponse($url));
     }
 
 	public function createSteamUserInfoRequest($steamUserId)

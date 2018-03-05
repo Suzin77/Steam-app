@@ -5,7 +5,7 @@
  */
 
 /*Configuration for steam API.
-Defined STEAM_API_KEY for connect with steam. Key is in seperate file in "higher" folder, not includet in repoaitory for security reasons. Normaly key would be here in config file.
+Defined STEAM_API_KEY for connect with steam. Key is in seperate file in "higher" folder, not includet in repository for security reasons. Normally key would be here in config file.
 */
 require '../cred/steamkey.php';
 /**

@@ -38,14 +38,13 @@ class SteamAPI extends Controller
 			$userInfo = $SteamAPISearchReadModel->searchSteamUser($_POST['steam_user_id']);
 			$userFriends = $SteamAPISearchReadModel->getSteamUserFriends($_POST['steam_user_id']);
 			$userGames = $SteamAPISearchReadModel->getSteamUserGames($_POST['steam_user_id']);
-			//var_dump($userGames);
 			/*
 			if($userGames['response']){
 				foreach($userGames['response']['games'] as $game =>$id){
 					if($DataSearchReadModel->isGame($userGames['response']['games'][$game]['appid'])){
 						$gameData = $userModel->getSteamGameData($userGames['response']['games'][$game]['appid']); 
 						if($gameData[$userGames['response']['games'][$game]['appid']]['success'] == true){
-							$userModel->writeGame($userGames['response']['games'][$game]['appid'],$gameData);
+							$DataSearchWriteModel->writeGame($userGames['response']['games'][$game]['appid'],$gameData);
 					    }
 					}					
 				}
@@ -81,10 +80,10 @@ class SteamAPI extends Controller
 
 		}
 			
-		require 'application/views/_templates/header.php';
-	    require 'application/views/steamusers/search.php';
-	    require 'application/views/_templates/debug.php';
-	    require 'application/views/_templates/footer.php';
+        require 'application/views/_templates/header.php';
+        require 'application/views/steamusers/search.php';
+        require 'application/views/_templates/debug.php';
+        require 'application/views/_templates/footer.php';
 
 	    //header('location: '.URL. 'steamusers/search/'.$_POST['submit_search_steam_user']);
 	}  

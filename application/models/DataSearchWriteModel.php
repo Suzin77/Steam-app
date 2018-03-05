@@ -34,6 +34,24 @@ class DataSearchWriteModel extends Model
 
 	}
 
+    public function writeGame($gameID, $gameData)
+    {
+        $sql = "INSERT INTO games (game_id, game_name, actual_price)
+                VALUES (:game_id, :game_name, :actual_price)";
+        $query = $this->db->prepare($sql);
+
+        $query->bindParam(':game_id', $gameID);
+        $query->bindParam(':game_name', $gameData[$gameID]['data']['name']);
+        $query->bindParam(':actual_price', $gameData[$gameID]['data']['price_overview']['final']);
+        //var_dump($gameData[$gameID]['data']['steam_appid']);
+        //echo"Game ID z write game to ".$gameID."</br>";
+        //var_dump($gameData[$gameID]['data']['name']);
+        //echo"</br>";
+        //var_dump($gameData[$gameID]['data']['price_overview']['final']);
+        //echo"</br>";
+        $query->execute();
+    }
+
     public function addGame($gameData)
     {
         $sql = "INSERT INTO games () VALUES ()";
