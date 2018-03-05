@@ -2,24 +2,23 @@
 
 class SteamAPI extends Controller
 {
-
     public function index()
     {
-		/* Page: index.
-		*/
-		//$steamUserModel = $this->loadModel('SteamUsersModel');
-		echo "jestesmy w klasie ".get_class($this);
-		//header('location: ' . URL . 'steamAPI/search');
-	}
+	    /* Page: index.
+	    */
+	    //$steamUserModel = $this->loadModel('SteamUsersModel');
+	    echo "jestesmy w klasie ".get_class($this);
+	    //header('location: ' . URL . 'steamAPI/search');
+    }
 
-	public function deleteUser($user_id)
-	{
-		if(isset($user_id)){
-			$DataSearchWriteModel = $this->loadModel('DataSearchWriteModel');
-			$DataSearchWriteModel->deleteUser($user_id);
-		}	
-		header('location: ' . URL . 'steamAPI/search');
-	}
+    public function deleteUser($user_id)
+    {
+        if(isset($user_id)){
+            $DataSearchWriteModel = $this->loadModel('DataSearchWriteModel');
+            $DataSearchWriteModel->deleteUser($user_id);
+        }	
+        header('location: ' . URL . 'steamAPI/search');
+    }
 
 	public function search()
 	{
