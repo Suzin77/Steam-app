@@ -4,11 +4,11 @@ class SteamAPI extends Controller
 {
     public function index()
     {
-	    /* Page: index.
-	    */
-	    //$steamUserModel = $this->loadModel('SteamUsersModel');
-	    echo "jestesmy w klasie ".get_class($this);
-	    //header('location: ' . URL . 'steamAPI/search');
+        /* Page: index.
+        */
+        //$steamUserModel = $this->loadModel('SteamUsersModel');
+        echo "jestesmy w klasie ".get_class($this);
+        //header('location: ' . URL . 'steamAPI/search');
     }
 
     public function deleteUser($user_id)
