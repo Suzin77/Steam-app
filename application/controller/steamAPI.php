@@ -107,22 +107,21 @@ class SteamAPI extends Controller
 	} 
 
 	public function admin()
-	{
+    {
 
-	}
+    }
 
-	public function updateUser()
-	{
-		$SteamAPISearchReadModel = $this -> loadModel('SteamAPISearchReadModel');
-		$steamUsersModel = $this->loadModel('SteamUsersModel');
-		$steamApiModel = $this->loadModel('SteamApiModel');
-		$allUsers = $steamUsersModel->getAllUsers();
-		foreach($allUsers as $key => $value){
-			
-			$userInfo = $SteamAPISearchReadModel->searchSteamUser($value['user_id']);
-			$steamApiModel->updateSteamUser($userInfo);
-		}
-	header('location: '. URL . 'steamusers/index');	
+    public function updateUser()
+    {
+        $SteamAPISearchReadModel = $this -> loadModel('SteamAPISearchReadModel');
+        $steamUsersModel = $this->loadModel('SteamUsersModel');
+        $steamApiModel = $this->loadModel('SteamApiModel');
+        $allUsers = $steamUsersModel->getAllUsers();
+        foreach($allUsers as $key => $value){	
+            $userInfo = $SteamAPISearchReadModel->searchSteamUser($value['user_id']);
+            $steamApiModel->updateSteamUser($userInfo);
+        }
+    header('location: '. URL . 'steamusers/index');	
 	}
 }
 

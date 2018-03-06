@@ -29,7 +29,7 @@ class DataSearchReadModel extends Model
 
 	public function getGames()
 	{
-		$sql = "SELECT game_id,game_name FROM games ORDER BY rand() LIMIT 20";
+		$sql = "SELECT game_id,game_name,actual_price FROM games ORDER BY rand() LIMIT 20";
 		$query = $this->db->prepare($sql);
 		$query->execute();
 		return $query->fetchAll();

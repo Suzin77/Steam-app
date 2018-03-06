@@ -50,9 +50,9 @@
                 <thead style="background-color: #ddd; font-weight: bold;">
                 <tr>
                     <td>Id</td>
-                    <td>Artist</td>
+                    <td>Tytuł</td>
                     <td>Track</td>
-                    <td>Link</td>
+                    <td>Cena</td>
                 </tr>
                 </thead>
                 <tbody>
@@ -61,6 +61,7 @@
                         <td><?php if (isset($game['game_id'])) echo $game['game_id']; ?></td>
                         <td><?php if (isset($game['game_name'])) echo $game['game_name']; ?></td>
                         <td><?php if (isset($game['avatar'])) echo "<img src=\"".$game['avatar']."\" style=\"padding:1px\"/>" ?></td>
+                         <td><?php if (isset($game['actual_price'])) echo $game['actual_price']?></td>
 
 
                         <td>
