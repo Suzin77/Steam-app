@@ -1,6 +1,11 @@
 <?php
 class Data extends Controller
 {
+	public function index()
+	{
+        
+	}
+
 	public function search()
 	{
 		$SteamAPISearchReadModel = $this->loadModel('SteamAPISearchReadModel');
@@ -14,6 +19,11 @@ class Data extends Controller
 	    $exampleToCheck = $DataSearchReadModel->getRandomRows('steam_id','steam_users_to_check',10);
 	    $amoutOfGames = $statsModel->getAmountOf('game_id','games');
 	    $games = $DataSearchReadModel->getGames();
+
+	    if(isset($_POST['game_title'])){
+	    	$_POST['clean_game_title'] = $steamapimodel->sanitizeString(($_POST['game_title']));   	
+	    	$searchResult = $DataSearchReadModel->searchDB('games', $_POST['clean_game_title']);
+	    }
 
 	    //$allUsers = $DataSearchReadModel->getAllUsers();
 	    //$gamesModel = $this -> loadModel('gamesModel');

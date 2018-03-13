@@ -35,6 +35,14 @@ class DataSearchReadModel extends Model
 		return $query->fetchAll();
 	}
 
+	public function searchDB($table, $phrase)
+	{
+		$sql = "SELECT game_name AS 'game_title', game_id FROM games WHERE game_name LIKE '%".$phrase."%'";
+		$query = $this->db->prepare($sql);
+		$query->execute();
+		return $query->fetchAll();
+	}
+
 	public function isGame($gameID)
     {
 		$sql = "SELECT game_id FROM games WHERE game_id = :game_id";

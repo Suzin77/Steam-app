@@ -37,6 +37,13 @@ if(isset($userInfo)){
 
 if(isset($gameInfo)){
 
+    $it = new RecursiveArrayIterator($gameInfo);
+    $tit = new RecursiveTreeIterator($it);
+
+    foreach( $tit as $key => $value ){
+        echo $value . PHP_EOL;
+    }
+
    var_dump($gameInfo["url"]);
    echo "<pre>".var_export($gameInfo,true)."</pre>";
 	$icon = $gameInfo[$gameID]['data']['header_image'];
