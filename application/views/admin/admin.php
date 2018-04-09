@@ -15,6 +15,6 @@
     </span>	
        
     </p>
-    <p><button type="button"><a href="<?php echo URL . 'admin/updateMany/40'; ?>">aktualizuj 10 na raz</a>
+    <p><button type="button"><a href="<?php echo URL . 'admin/updateMany/40'; ?>">aktualizuj 40 na raz</a>
 	    </button></p>
 </div>

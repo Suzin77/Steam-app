@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>PHP MVC skeleton</title>
+    <title>Steam MVC</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- css -->
@@ -19,14 +19,13 @@
 </head>
 <body>
 <!-- header -->
+<div class="page">
 <div class="container">    
     <h1></h1>       
     <!-- navigation -->
     <div class="nav navigation">
         <ul>
-            <!-- same like "home" or "home/index" -->
-            <li class = "btn btn-default""><a href="<?php echo URL; ?>">home</a></li>
-            <li class = "btn btn-default""><a href="<?php echo URL; ?>home/exampleone">exampleone</a></li>
+            <!-- same like "home" or "home/index" -->         
             <li class = "btn btn-default""><a href="<?php echo URL; ?>admin/index">Admin</a></li>
             <li class = "btn btn-default""><a href ="<?php echo URL; ?>data/search">Search in DB</a></li>
             <li class = "btn btn-default""><a href ="<?php echo URL; ?>steamAPI/search">Search by API</a></li>

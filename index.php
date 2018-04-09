@@ -2,8 +2,11 @@
 
 /**
  * A simple PHP MVC skeleton
- * dodanie mojego tekstu.
- * dodanie drugiej linijki
+ * Jest to szkielet wzorca MVC do treningu. Staram się napisać w tym modelu 
+ * aplikację pozwalającą na komunikacjępoprzez Z API STEAM w celu uzyskania 
+ * infomracji o grach i użytkownikach.
+ * szkielet MVC oraz metoda trimująca adres url zostala zaimplemementowana z 
+ * poniższego przykładu 
  * dodawanie do develpmentu
  *
  * @package php-mvc

@@ -25,6 +25,8 @@ class SteamAPI extends Controller
         /* Page Search.
         If search form are submitted app start to connect with Steam API and return result as an array.
         */
+
+        //Load necessary models.
         $SteamAPISearchReadModel = $this -> loadModel('SteamAPISearchReadModel');
         $userModel = $this->loadModel('SteamUsersModel');
         $DataSearchReadModel = $this ->loadModel('DataSearchReadModel');
@@ -32,7 +34,7 @@ class SteamAPI extends Controller
         $steamApiModel = $this->loadModel('SteamApiModel');
         $exampleToCheck = $DataSearchReadModel->getRandomRows('steam_id','steam_users_to_check',10);	
         if(isset($_POST['submit_search_steam_user'])){			
-            //sanitization of enterned data.
+        //sanitization of enterned data.
             $_POST['steam_user_id'] = $steamApiModel->sanitizeString(($_POST['steam_user_id']));
             $userInfo = $SteamAPISearchReadModel->searchSteamUser($_POST['steam_user_id']);
             $userFriends = $SteamAPISearchReadModel->getSteamUserFriends($_POST['steam_user_id']);

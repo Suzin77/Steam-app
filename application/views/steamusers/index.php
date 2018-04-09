@@ -18,6 +18,7 @@
 <!-- Tabela z wynikami wyszukiwania-->
     <div class = "row">
         <div class = "col-sm-6">
+        <?php if(isset($searchResult)){ ?>
         <h3>Wynik wyszukiwania</h3>
             <table class = "">
                 <thead style="background-color: #ddd; font-weight: bold;">
@@ -28,7 +29,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($searchResult as $game) { ?>
+                <?php     
+                    foreach ($searchResult as $game) { ?>
                     <tr>
                         <td><?php if (isset($game['game_title'])) echo $game['game_title']; ?></td>
                         <td><?php if (isset($game['game_id'])) echo $game['game_id']; ?></td>
@@ -40,9 +42,11 @@
                                 <a href="<?php echo $user->link; ?>"><?php echo $user->link; ?></a>
                             <?php } ?>
                         </td>
-                        <td><a href="<?php echo URL . 'steamusers/deleteuser/' . $user['user_id']; ?>">x</a></td>
+                        
                     </tr>
-                <?php } ?>
+                <?php }
+                 }
+                 ?>
                 <!-- end of foreach -->
                 </tbody>
             </table>
@@ -50,7 +54,7 @@
 <!-- Tabela z losowymi uzytkownikami-->
     <div class = "row">
         <div class = "col-sm-6">
-    	<h3>List of users (data from first model)</h3>
+    	<h3>List of random 20 users form database</h3>
             <table class = "">
                 <thead style="background-color: #ddd; font-weight: bold;">
                 <tr>
@@ -82,7 +86,7 @@
             </table>
         </div>
         <div class="col-sm-6">
-        <h3>List of Games </h3>
+        <h3>List of 20 random Games from database</h3>
         <table class = "">
                 <thead style="background-color: #ddd; font-weight: bold;">
                 <tr>
@@ -114,4 +118,5 @@
             </table>
         </div>
     </div>        
+</div>
 </div>	

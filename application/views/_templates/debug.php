@@ -1,4 +1,4 @@
-<div class = "container">
+<div class = "container debug">
 <p>debuger</p>
 <?php
 
@@ -41,17 +41,18 @@ if(isset($gameInfo)){
     $tit = new RecursiveTreeIterator($it);
 
     foreach( $tit as $key => $value ){
-        echo $value . PHP_EOL;
+        echo $value ."</br>". PHP_EOL;
     }
 
-   var_dump($gameInfo["url"]);
-   echo "<pre>".var_export($gameInfo,true)."</pre>";
-	$icon = $gameInfo[$gameID]['data']['header_image'];
-	foreach($gameInfo[$gameID]['data'] as $key => $value){
-		echo "klucz: <b>".$key."</b> wartosc <b>".$value." </b></br>";
-	}	
+    var_dump($gameInfo["url"]);
+    echo "<pre>".var_export($gameInfo,true)."</pre>";
+    if(isset($gameInfo[$gameID]['data']['header_image'])){
+        $icon = $gameInfo[$gameID]['data']['header_image'];
+	    foreach($gameInfo[$gameID]['data'] as $key => $value){
+	        echo "klucz: <b>".$key."</b> wartosc <b>".$value." </b></br>";
+	    }	
 	//var_dump($gameInfo);
-
+    }
 ?>
 <img src="<?php echo $icon ?>" style="padding:1px"/>
 <?php } ?>

@@ -2,7 +2,7 @@
 
 class SteamAPISearchReadModel extends Model
 {
-	//Model do laczenia i czytania danychc z api Steam aaaaaaa
+	//Model do laczenia sie ze steam API i czytania danychc z api Steam
 
 	public function searchSteamUser($steamUserId)
 	{

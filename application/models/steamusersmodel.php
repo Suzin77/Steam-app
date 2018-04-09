@@ -2,7 +2,11 @@
 
 class SteamUsersModel extends Model
 {
-    /* 
+
+    /*
+
+    * docelowo clasa do usunięcia. moedoty są wg funkcji przenoszone do glownych modeli:
+    - steamAPISearchModel, DataSearchReadModel, DataSearchWriteModel 
     ** przeniesiona do datasearchreadmodel
 	public function getUsers()
 	{

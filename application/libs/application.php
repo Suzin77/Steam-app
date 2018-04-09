@@ -58,10 +58,10 @@ class Application
             }
         } else {
             // invalid URL, so simply show home/index
-            require './application/controller/home.php';
+            require './application/controller/steamAPI.php';
             
-            $home = new Home();
-            $home->index();
+            $steamAPI = new steamAPI();
+            $steamAPI->search();
         }
     }
 
@@ -85,7 +85,7 @@ class Application
             $this->url_parameter_3 = (isset($url[4]) ? $url[4] : null);
 
             // for debugging. uncomment this if you have problems with the URL
-             //echo 'Controller: ' . $this->url_controller . '<br />';
+            //echo 'Controller: ' . $this->url_controller . '<br />';
             // echo 'Action: ' . $this->url_action . '<br />';
             // echo 'Parameter 1: ' . $this->url_parameter_1 . '<br />';
             // echo 'Parameter 2: ' . $this->url_parameter_2 . '<br />';
