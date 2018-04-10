@@ -64,12 +64,10 @@ class DataSearchWriteModel extends Model
     	$query = $this->db->prepare($sql);
     	$query->bindParam(':steam_id', $SteamID );
     	$query->execute();
-    	echo "</br> usunięcie wykonane";
     }
 
     public function addAnswer($data)
     {
-
         $sql = "INSERT INTO posts(answer) VALUES (:answer)";
         $query = $this->db->prepare($sql); 
         $query->bindParam(':answer', $data);

@@ -24,13 +24,10 @@
     <h1></h1>       
     <!-- navigation -->
     <div class="nav navigation">
-        <ul>
-            <!-- same like "home" or "home/index" -->         
-            <li class = "btn btn-default""><a href="<?php echo URL; ?>admin/index">Admin</a></li>
+        <ul>         
             <li class = "btn btn-default""><a href ="<?php echo URL; ?>data/search">Search in DB</a></li>
             <li class = "btn btn-default""><a href ="<?php echo URL; ?>steamAPI/search">Search by API</a></li>
+            <li class = "btn btn-default""><a href="<?php echo URL; ?>admin/index">Admin</a></li>
         </ul>
-    </div>
-    <!-- simple div for javascript output, just to show how to integrate js into this MVC construct -->
-   
+    </div>  
 </div>

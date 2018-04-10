@@ -1,6 +1,6 @@
 
 <div class="container">
-	Edycja Suzin 2018 
+	Edycja Patryk Sosnowski 2018 
 </div>
 
 </div>

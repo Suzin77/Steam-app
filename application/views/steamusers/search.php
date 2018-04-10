@@ -1,6 +1,6 @@
 <div class = "container">
-    <h3>Search Steam User</h3>
-    <p>examples of ID: 76561198014765204, 76561197970373921, 76561198002500907, 76561198008991804, 76561198018826719</p>
+    <h3>Wyszukaj użytkownika po SteamID</h3>
+    <p>Przykładowe ID: 76561198014765204, 76561197970373921, 76561198002500907, 76561198008991804, 76561198018826719</p>
     <p>Kilka losowych przykladów do sprawdzenia :
     <?php foreach($exampleToCheck as $id){
         echo $id['steam_id']." // ";
@@ -21,11 +21,7 @@
     	 	
 	    	 	if(isset($userGames['response'])){
 	    	 		echo "Urzytkownik ma w kolekcji ".$userGames['response']['game_count']." gier</br>";
-	    	 	}    
-    	 	    //echo "</br>";
-    	 	    //echo "<table>".$ftablePass."</table></br>";
-    	 	    //$user_model->recursiveResponse($userGames);
-    	 	    //var_dump($userGames); 	 	
+	    	 	}     	 	     	
     	 	    
 	    	 	$table = "<table> <tbody>";
 	    	 	foreach ($userInfo['response']['players'] as $key => $value){

@@ -1,7 +1,5 @@
 <?php
 
-//include_once 'application/libs/model.php';
-
 class SteamApiModel extends Model
 {
 	public function loadModel($model_name)
@@ -11,7 +9,7 @@ class SteamApiModel extends Model
         return new $model_name($this->db);
     }
 	
-    /* przeniesie do steam api searchmodel
+    /* przeniesie do steam api search model
 	public function getSteamUserFriends($steamUserId)
 	{		
 		$steamUserFriendsRequest = "http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=".STEAM_API_KEY."&steamid=".$steamUserId."&relationship=friend";
