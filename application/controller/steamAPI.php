@@ -36,7 +36,7 @@ class SteamAPI extends Controller
             $_POST['clean_steam_user_id'] = $steamApiModel->sanitizeString(($_POST['steam_user_id']));
             $userInfo = $SteamAPISearchReadModel->searchSteamUser($_POST['clean_steam_user_id']);
             $userFriends = $SteamAPISearchReadModel->getSteamUserFriends($_POST['clean_steam_user_id']);
-            $userGames = $SteamAPISearchReadModel->getSteamUserGames($_POST['CLEAN_steam_user_id']);
+            $userGames = $SteamAPISearchReadModel->getSteamUserGames($_POST['clean_steam_user_id']);
                      
             if ($DataSearchReadModel->checkUser($_POST['clean_steam_user_id'])){
                 $DataSearchWriteModel->addUser($userInfo);						
@@ -63,9 +63,9 @@ class SteamAPI extends Controller
         //header('location: '.URL. 'steamusers/search/'.$_POST['submit_search_steam_user']);
     }  
 
-	public function checkUser($userId)
+    public function checkUser($userId)
 	{
-		if(isset($userId)){
+        if(isset($userId)){
             $DataSearchReadModel = $this ->loadModel('DataSearchReadModel');
 			$SteamAPISearchReadModel = $this -> loadModel('SteamAPISearchReadModel');
 			$userModel = $this -> loadModel('SteamUsersModel');

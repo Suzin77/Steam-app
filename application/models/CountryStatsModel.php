@@ -3,12 +3,8 @@
 class CountryStatsModel extends Model
 {
 
-	/*public function __construct($db)
-	{
-		$this -> countryList = $this -> getCountryCode();
-		$this -> numberOfrows = $this ->count($this -> countryList);
-		//$this -> countriesData = $this ->
-	}
+	/* Klasa służy do pobiernaia i wyliczania statystyk odnośnie krajów użytkowników.  
+	* Zastanowić się czy getCountryCode() nie powinno być w DataReadModel
 	*/
 	 public function getCountryCode()
     {
@@ -38,10 +34,6 @@ class CountryStatsModel extends Model
     	return (round((($fraction*100)/$all), 2));
     }
     
-
-
-
-
 }
 
 ?>

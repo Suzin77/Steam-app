@@ -1,5 +1,11 @@
 <?php
 
+/*IMPORTANT
+*Cała klasa ma być rozbita na inne ponieważ jest aktualnie za duża.
+*
+*
+*
+*/
 class SteamApiModel extends Model
 {
 	public function loadModel($model_name)
@@ -9,13 +15,7 @@ class SteamApiModel extends Model
         return new $model_name($this->db);
     }
 	
-    /* przeniesie do steam api search model
-	public function getSteamUserFriends($steamUserId)
-	{		
-		$steamUserFriendsRequest = "http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=".STEAM_API_KEY."&steamid=".$steamUserId."&relationship=friend";
-		return $this->getResponse($steamUserFriendsRequest);
-	}
-	*/
+   
 	public function sanitizeString($string)
 	{
 		$string = strip_tags($string);
@@ -28,16 +28,6 @@ class SteamApiModel extends Model
 		$request = "http://store.steampowered.com/api/appdetails?appids=".$gameID;
 		return $this->getResponse($request); 
 	}
-
-	/* przeniesienie do steamAPireadModel
-	public function getSteamUserGames($steamUserId)
-	{
-		$steamUserGamesRequest = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=".STEAM_API_KEY."&format=json&input_json={\"steamid\":".$steamUserId.",\"include_appinfo\":true,\"include_played_free_games\":false}";
-
-		return $this -> getResponse($steamUserGamesRequest);
-	}
-    */
-	
 
 	public function updateSteamUser($steamUsersData)
 	{
@@ -53,8 +43,6 @@ class SteamApiModel extends Model
 		$massage = $this->loadModel('deepModel');
 		return $massage->echoFromDeep('Terror From The Deep');
 	}
-
-	
 
     public function recursiveResponse($array, $level = 1)
     {

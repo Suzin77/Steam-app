@@ -22,8 +22,33 @@
 	    	 	if(isset($userGames['response'])){
 	    	 		echo "Urzytkownik ma w kolekcji ".$userGames['response']['game_count']." gier</br>";
 	    	 	}     	 	     	
-    	 	    
+    	 	    ?>
+                <table>
+                    <thead></thead>
+                    <tbody>
+                        <?php     
+                    foreach ($userInfo['response']['players'] as $key => $value) { ?>
+                    <tr>
+                        <td><?php if (isset($userInfo['response']['players'][0]['personaname'])) echo $userInfo['response']['players'][0]['personaname']; ?></td>
+                        <td><?php if (isset($userInfo['response']['players'][0]['steamid'])) echo $userInfo['response']['players'][0]['steamid']; ?></td>
+                        <td><?php if (isset($userInfo['response']['players'][0]['avatar'])) echo "<img src=\"".$userInfo['response']['players'][0]['avatar']."\" style=\"padding:1px\"/>" ?></td>
+                        <td>
+                            <?php if (isset($userInfo['response']['players'][0]['timecreated'])) echo date('Y.m.d',$userInfo['response']['players'][0]['timecreated']); }?>
+                              
+                            
+                        </td>
+                        
+                    </tr>
+                <?php 
+                 }
+                 ?>
+                <!-- end of foreach -->
+                        
+                    </tbody>
+                </table>    
+                <?php
 	    	 	$table = "<table> <tbody>";
+                var_dump($userInfo['response']['players']);
 	    	 	foreach ($userInfo['response']['players'] as $key => $value){
 	    	 		$table .="<tr>   	 		    						
 	    						<td>".$userInfo['response']['players'][0]['personaname']."</td>
@@ -39,7 +64,7 @@
 	    	
 	    		//echo"</br>".$ftableBody;	    		
 	    	}
-		    }  
+		     
 
     	?>
 
