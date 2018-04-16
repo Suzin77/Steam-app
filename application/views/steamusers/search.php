@@ -46,27 +46,6 @@
                         
                     </tbody>
                 </table>    
-                <?php
-	    	 	$table = "<table> <tbody>";
-                var_dump($userInfo['response']['players']);
-	    	 	foreach ($userInfo['response']['players'] as $key => $value){
-	    	 		$table .="<tr>   	 		    						
-	    						<td>".$userInfo['response']['players'][0]['personaname']."</td>
-	    						<td>".$userInfo['response']['players'][0]['steamid']."</td>
-	                            <td><img src=\"".$userInfo['response']['players'][0]['avatar']."\" style=\"padding:1px\"/></td>
-	                            <td>".date('Y.m.d',$userInfo['response']['players'][0]['timecreated'])."</td>
-	    					  </tr>";	 
-
-	    	 	}
-	    	 	$table .= "</table></tbody>";
-	    	 	echo $table;	    	 	
-	    	if (isset($userFriends)){
-	    	
-	    		//echo"</br>".$ftableBody;	    		
-	    	}
-		     
-
-    	?>
-
+                
     </div>	
 </div>

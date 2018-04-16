@@ -111,6 +111,6 @@
 </div>
 <script>
     $("#show-debug").on("click",function(){
-        $(".debug-content").show("slow");
+        $(".debug-content").toggle("slow");
     });
 </script>
