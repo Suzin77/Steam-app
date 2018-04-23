@@ -97,7 +97,7 @@ class SteamUsersModel extends Model
     	$query = $this->db->prepare($sql);
     	$query->execute(array(':user_id'=>$userID, ':game_id'=>$gameID));
     	if(($query->rowCount())==0){
-    		return true;
+    		return true; //raczej powinno byc odwrotnie.przemysleć
     	}
     	return false;
     }
@@ -106,7 +106,6 @@ class SteamUsersModel extends Model
     {
     	$sql = "INSERT INTO user_games (user_id, game_id)
                 VALUES (:user_id, :game_id)";
-        //var_dump($SteamUserData['response']['players'][0]['loccountrycode']);
         $query = $this->db->prepare($sql);	
     	$query->bindParam(':user_id', $userID);
     	$query->bindParam(':game_id', $gameID);	
@@ -201,38 +200,6 @@ class SteamUsersModel extends Model
     		}
     	}
     }
-
-/* jest w model.php
-    public function getResponse($url)
-    {
-    	$ch = curl_init();
-	    curl_setopt($ch, CURLOPT_URL,$url);
-	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	    $output = curl_exec($ch);
-	    if ($output === false){ 
-	       echo "Crul error: ".crul_error($ch);
-	    } else {	
-	       $data = json_decode($output,true);
-	       curl_close ($ch);      
-	       return $data;
-	    }
-    }
-
-*/
-    public function recursiveResponse($array, $level = 1)
-    {
-	    foreach($array as $key => $value){
-	        //If $value is an array.	        
-	        if(is_array($value)){
-	        	echo str_repeat("&nbsp", $level)." [".$key."]: </br>";
-	            //We need to loop through it.
-	            $this -> recursiveResponse($value, $level + 1);
-	        } else {
-	            //It is not an array, so print it out.
-	            echo str_repeat("&nbsp ", $level)." [".$key . "]: " . $value, '<br>';
-	        }
-	    }
-	}
 
 }
 ?>

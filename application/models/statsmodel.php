@@ -38,7 +38,6 @@ class StatsModel
         $result[]= $data[$key]["loccountry_code"];
     }
     $result = array_count_values($result);
-    //array_count_values($userCountryCodes['loccountry_code']);
     return $result;
     }
 

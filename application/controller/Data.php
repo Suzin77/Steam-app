@@ -1,4 +1,6 @@
 <?php
+//namespace Data;
+
 class Data extends Controller
 {
 	public function index()
@@ -21,7 +23,8 @@ class Data extends Controller
 	    $games = $DataSearchReadModel->getGames();
 
 	    if(isset($_POST['game_title'])){
-	    	$_POST['clean_game_title'] = $steamapimodel->sanitizeString(($_POST['game_title']));   	
+	    	//$_POST['clean_game_title'] = $steamapimodel->sanitizeString(($_POST['game_title']));
+	    	$_POST['clean_game_title'] = Sanitizer::sanitizeString(($_POST['game_title']));     	
 	    	$searchResult = $DataSearchReadModel->searchDB('games', $_POST['clean_game_title']);
 	    }
 

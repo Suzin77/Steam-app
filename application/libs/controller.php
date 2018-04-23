@@ -1,5 +1,5 @@
 <?php
-
+//namespace application\libs;
 /**
  * This is the "base controller class". All other "real" controllers extend this class.
  */

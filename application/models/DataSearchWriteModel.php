@@ -1,4 +1,5 @@
-<?php 
+<?php
+//namespace application\models\DataSearchWriteModel;
 
 class DataSearchWriteModel extends Model
 {
@@ -86,5 +87,14 @@ class DataSearchWriteModel extends Model
         $sql = "INSERT INTO steam_users_to_check (steam_id) VALUES (:steam_id)";
         $query = $this->db->prepare($sql);
         $query->execute(array(':steam_id'=>$firendSteamId));
-    }    
+    }
+
+    public function updateSteamUser($steamUsersData)
+    {
+        $sql="UPDATE users SET communityvisibilitystate = :communityvisibilitystate WHERE user_id = :steam_id";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':steam_id', $steamUsersData['response']['players'][0]['steamid'], PDO::PARAM_STR);
+        $query->bindParam(':communityvisibilitystate', $steamUsersData['response']['players'][0]['communityvisibilitystate']);
+        $query->execute();      
+    }   
 }

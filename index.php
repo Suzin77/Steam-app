@@ -23,6 +23,10 @@ if (file_exists('vendor/autoload.php')) {
 
 // load application config (error reporting etc.)
 require 'application/config/config.php';
+require 'application/libs/classLoader.class.php';
+
+//loader to load all .class.php files from dir application/models
+classLoader::loadClass("application/models/");
 
 // load application class
 require 'application/libs/application.php';

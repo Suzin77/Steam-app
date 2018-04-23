@@ -1,4 +1,7 @@
-<?php 
+<?php
+//namespace application\libs;
+
+//use application\libs;
 
 class Admin extends Controller
 {	
@@ -80,11 +83,10 @@ class Admin extends Controller
 	public function answer()
 	{
 		$DataSearchWriteModel = $this->loadModel('DataSearchWriteModel');
-		$steamApiModel = $this->loadModel('SteamApiModel');
 					
 		if(isset($_POST['answer'])&& !empty($_POST['answer'])){			
 			//sanitization of enterned data.
-			$answer = $steamApiModel->sanitizeString(($_POST['answer']));
+			$answer = Sanitizer::sanitizeString($_POST['answer']);
 			$DataSearchWriteModel->addAnswer($answer);
 			header('location: '. URL . 'admin/pytania');
 
