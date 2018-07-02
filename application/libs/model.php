@@ -24,7 +24,7 @@ class Model
 	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	    $output = curl_exec($ch);
 	    if ($output === false){ 
-	       echo "Crul error: ".crul_error($ch);
+	       echo "Crul error: ".curl_error($ch);
 	    } else {
 	       $data = json_decode($output,true);
 	       curl_close ($ch);      

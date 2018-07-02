@@ -52,14 +52,13 @@
     ?>
     <img src="<?php echo $icon ?>" style="padding:1px"/>
     <?php } ?>
-    <button type="button" class = "btn btn-default""><a href= "<?php echo URL . 'steamusers/updateUser'; ?>">Update Me!</a></button>
      <table>
                 <thead style="background-color: #ddd; font-weight: bold;">
                 <tr>
                     <td>Id</td>
                     <td>relation</td>
                     
-             		<td>trzecia</td>>
+             		<td>procent</td>>
                     <td>chceck</td>
                 </tr>
                 </thead>

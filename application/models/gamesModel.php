@@ -18,7 +18,7 @@ class gamesModel
 
 	public function getSteamGameData($gameID)
     {
-    	$url = "http://store.steampowered.com/api/appdetails?appids=".$gameID;
+    	$url = "https://store.steampowered.com/api/appdetails?appids=".$gameID;
     	return $this->getResponse($url);
     }
 

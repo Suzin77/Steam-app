@@ -14,7 +14,6 @@ class Data extends Controller
 		$steamUserModel = $this->loadModel('SteamUsersModel');
 		$DataSearchReadModel = $this ->loadModel('DataSearchReadModel');
 	    $users = $DataSearchReadModel->getUsers();	    
-	    $steamapimodel = $this->loadModel('SteamApiModel');
 	    $statsModel = $this->loadModel('StatsModel');
 	    $amount_of_users = $statsModel->getAmountOf('user_id','users');
 	    $amountToCheck = $statsModel->getAmountOf('steam_id','steam_users_to_check');
@@ -22,8 +21,7 @@ class Data extends Controller
 	    $amoutOfGames = $statsModel->getAmountOf('game_id','games');
 	    $games = $DataSearchReadModel->getGames();
 
-	    if(isset($_POST['game_title'])){
-	    	//$_POST['clean_game_title'] = $steamapimodel->sanitizeString(($_POST['game_title']));
+	    if(isset($_POST['game_title'])){	    	
 	    	$_POST['clean_game_title'] = Sanitizer::sanitizeString(($_POST['game_title']));     	
 	    	$searchResult = $DataSearchReadModel->searchDB('games', $_POST['clean_game_title']);
 	    }

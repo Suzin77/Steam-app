@@ -19,7 +19,7 @@ class ClassLoader
 	public static function readDir($path)
 	{
 		foreach(glob($path."*.*") as $file){
-			//echo $file." ma rozmiar ".filesize($file)."\n";
+			echo $file." ma rozmiar ".filesize($file)."\n";
 		}
 	}
 }
