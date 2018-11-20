@@ -27,6 +27,6 @@ define('URL', 'http://localhost/MVC/SteamMVC/main/');
  */
 define('DB_TYPE', 'mysql');
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'php-mvc');
+define('DB_NAME', 'steam');
 define('DB_USER', 'root');
 define('DB_PASS', '');
