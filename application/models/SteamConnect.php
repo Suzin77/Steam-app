@@ -3,13 +3,24 @@ use GuzzleHttp\Client;
 
 class SteamConnect extends Model
 {
-
-    public function startConnect()
+    
+    public function createGuzzClient($base_uri)
     {
-        $connection = new Client(['base_uri'=>'https://store.steampowered.com/api/appdetails?appids=3900']);
-        $response = $connection->request('GET','https://store.steampowered.com/api/appdetails?appids=3900');
+        $guzzClient = new Client(['base_uri'=>$base_uri]);
+        return $guzzClient;
+    }
+
+    public function getResponseStatusCode($guzzClient)
+    {
+        
+        $response = $guzzClient->request('GET','https://store.steampowered.com/api/appdetails?appids=3900');
         $statusCode = $response->getStatusCode();
-        return $response;
+        $statusCode = 200;
+        return $statusCode;
+    }
+
+    public function getGuzzresponseCode(){
+
     }
 
     public function getBody($response)
