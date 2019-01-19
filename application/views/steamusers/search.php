@@ -23,7 +23,7 @@
 	    	 		echo "Urzytkownik ma w kolekcji ".$userGames['response']['game_count']." gier</br>";
 	    	 	}     	 	     	
     	 	    ?>
-                <table>
+                <table class ="">
                     <thead></thead>
                     <tbody>
                         <?php     

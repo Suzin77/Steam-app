@@ -8,5 +8,3 @@ class Sanitizer
         return stripcslashes($string);
     }       
 }
-
-?>

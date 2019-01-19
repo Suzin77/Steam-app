@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
     <!--own css-->
     <link href="<?php echo URL; ?>public/css/style.css" rel="stylesheet">
+    <link href="<?php echo URL; ?>public/css/slack.css" rel="stylesheet">
     <!-- jQuery -->
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
     

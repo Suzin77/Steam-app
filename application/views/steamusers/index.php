@@ -55,8 +55,8 @@
     <div class = "row">
         <div class = "col-sm-6">
     	<h3>List of random 20 users form database</h3>
-            <table class = "">
-                <thead style="background-color: #ddd; font-weight: bold;">
+            <table class = "table table-dark table-hover">
+                <thead >
                 <tr>
                     <td>User steam ID</td>
                     <td>Name</td>
@@ -87,8 +87,8 @@
         </div>
         <div class="col-sm-6">
         <h3>List of 20 random Games from database</h3>
-        <table class = "">
-                <thead style="background-color: #ddd; font-weight: bold;">
+        <table class = "table table-dark table-hover">
+                <thead >
                 <tr>
                     <td>Id</td>
                     <td>Tytuł</td>
