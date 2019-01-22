@@ -73,13 +73,6 @@ class Admin extends Controller
 		$updateModel->UpdateUsers(1);
 	}
 
-	public function pytania()
-	{
-		require 'application/views/_templates/header.php'; 
-		require 'application/views/_templates/pytania.php';
-		require 'application/views/_templates/footer.php';
-	}
-
 	public function answer()
 	{
 		$DataSearchWriteModel = $this->loadModel('DataSearchWriteModel');
