@@ -18,7 +18,7 @@ class Data extends Controller
 	    $amount_of_users = $statsModel->getAmountOf('user_id','users');
 	    $amountToCheck = $statsModel->getAmountOf('steam_id','steam_users_to_check');
 	    $exampleToCheck = $DataSearchReadModel->getRandomRows('steam_id','steam_users_to_check',10);
-	    $amoutOfGames = $statsModel->getAmountOf('game_id','games');
+	    $amountOfGames = $statsModel->getAmountOf('game_id','games');
 	    $games = $DataSearchReadModel->getGames();
 
 	    if(isset($_POST['game_title'])){	    	
@@ -33,8 +33,15 @@ class Data extends Controller
 
 	    $gameInfo = $SteamAPISearchReadModel->getSteamGameData($gameID);
 
+		$loader = new Twig_Loader_Filesystem('application/views/steamusers');
+		$twig = new Twig_Environment($loader);
+		$twig->addGlobal('URL', URL);
 		require 'application/views/_templates/header.php';
-	    require 'application/views/steamusers/index.php';
+		echo $twig->render('index.php',[
+			'users' => $users,
+			'amount_of_games'=> $amountOfGames,
+			'games'=>$games]);
+	    //require 'application/views/steamusers/index.php';
 	    require 'application/views/_templates/debug.php';
 	    require 'application/views/_templates/footer.php';
 	}

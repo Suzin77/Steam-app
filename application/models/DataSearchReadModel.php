@@ -20,7 +20,7 @@ class DataSearchReadModel extends Model
 
 	public function getUsers()
 	{
-		$sql = "SELECT user_id,persona_name,avatar FROM users ORDER BY rand() LIMIT 20";
+		$sql = "SELECT user_id,persona_name,avatar,profileurl FROM users ORDER BY rand() LIMIT 20";
 		$query = $this->db->prepare($sql);
 		$query->execute();
 		return $query->fetchAll();

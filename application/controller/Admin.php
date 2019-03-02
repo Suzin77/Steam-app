@@ -50,7 +50,7 @@ class Admin extends Controller
 		-komunikuje sie ze steam aby pobrac infomacje
 		-zapisuje pobrane dane w tabeli users
 		-usuwa zaktualizowne Id z listy "do sprawdzenia"
-
+		http://localhost/MVC/SteamMVC/main/admin/updateMany/200
 		**/
 		if($howMany > 200){
 			$howMany=200;

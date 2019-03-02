@@ -25,7 +25,7 @@ class TablesViews
 
 	public function createTableHeader($tableHeaders)
 	{	
-		$result = "<thead style=\"background-color: #ddd; font-weight: bold;\"><tr>";
+		$result = "<thead ><tr>";
 		foreach($tableHeaders as $key => $value){
 			$result .= "<td> ".$key." </td>";
 		}
