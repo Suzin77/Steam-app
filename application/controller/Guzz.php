@@ -1,21 +1,21 @@
 <?php
 use GuzzleHttp\CLient;
+use GuzzleHttp\Psr7\Request;
 
 class Guzz extends Controller
 {
     public function index()
     {
-        $guzz = $this->loadModel('steamconnect');
-        //$client = $guzz->createGuzzClient('http://localhost/MVC/SteamMVC/main');
-        $client = $guzz->createGuzzClient('https://store.steampowered.com/api/appdetails?appids=237370');
-        $response = $client->request('GET','https://store.steampowered.com/api/appdetails?appids=237370');
-        //$response = $client->request('GET','http://localhost/MVC/SteamMVC/main');
-        $page = json_decode($response->getBody());
+        $base_uri = "https://store.steampowered.com/api/appdetails?appids=237370";
+        //$guzz = $this->loadModel('steamconnect');
+        $guzzClient = new Client(['base_uri'=>$base_uri]);
+
+        $request = new Request('GET', 'https://store.steampowered.com/api/appdetails?appids=237370');
+        $response = $guzzClient->send($request, ['timeout' => 2]);
+        var_dump($response->getStatusCode());
+        $body = $response->getBody()->getContents();
 
         $title = 'rrrtrtrtrtr';
-        //var_dump($client);
-        //var_dump($response);
-        //var_dump($page);
         $loader = new Twig_Loader_Filesystem('application/views/_templates');
         $twig = new Twig_Environment($loader);
 
@@ -47,5 +47,21 @@ class Guzz extends Controller
         //include 'application/views/_templates/twig-example.php';
         include 'application/views/_templates/footer.php';
         
+    }
+
+    public function ajaxtest()
+    {
+        $base_uri = "http://localhost/bawialnia/app/ajax/loadgame.php";
+
+        $guzzClient = new Client(['base_uri'=>$base_uri]);
+
+        $request = new Request('GET', 'https://store.steampowered.com/api/appdetails?appids=237370');
+        //$request = new Request('GET', $base_uri);
+        $response = $guzzClient->send($request);
+        $getContent = $response->getBody()->getContents();
+        $json = json_decode($getContent,true);
+        var_dump($json['237370']);
+        var_dump($json);
+        //$body = $response->getBody()->getContents();
     }
 }
